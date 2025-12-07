@@ -70,27 +70,33 @@ export default function Testimonials() {
     }, 4000)
   }
 
-  useEffect(() => {
-    const database = getFirebaseDatabase()
-    const testimonialRef = ref(database, "testimonials")
+    useEffect(() => {
+    try {
+      const database = getFirebaseDatabase()
+      const testimonialRef = ref(database, "testimonials")
 
-    const q = query(testimonialRef, orderByChild("createdAt"), limitToLast(10))
+      const q = query(testimonialRef, orderByChild("createdAt"), limitToLast(10))
 
-    const unsubscribe = onValue(q, (snapshot) => {
-      const data = snapshot.val()
-      if (data) {
-        const testimonialsArray: Testimonial[] = Object.entries(data)
-          .map(([id, value]: any) => ({
-            id,
-            ...value,
-          }))
-          .reverse()
-        setTestimonials(testimonialsArray)
-      }
-    })
+      const unsubscribe = onValue(q, (snapshot) => {
+        const data = snapshot.val()
+        if (data) {
+          const testimonialsArray: Testimonial[] = Object.entries(data)
+            .map(([id, value]: any) => ({
+              id,
+              ...value,
+            }))
+            .reverse()
+          setTestimonials(testimonialsArray)
+        }
+      })
 
-    return () => unsubscribe()
+      return () => unsubscribe()
+    } catch (error) {
+      console.error("Firebase initialization error:", error)
+      return () => {}
+    }
   }, [])
+
 
   useEffect(() => {
     if (!autoplay || testimonials.length === 0) return
@@ -102,7 +108,7 @@ export default function Testimonials() {
     return () => clearInterval(interval)
   }, [autoplay, testimonials.length])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!formData.author || !formData.role || !formData.text) {
