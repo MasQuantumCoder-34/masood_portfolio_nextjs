@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { ref, push, query, orderByChild, limitToLast, onValue } from "firebase/database"
-import { getFirebaseDatabase } from "@/lib/firebase"
+import { database } from "@/lib/firebase"
 import { X, CheckCircle, AlertCircle } from "lucide-react"
 
 interface Testimonial {
@@ -71,9 +71,7 @@ export default function Testimonials() {
   }
 
   useEffect(() => {
-    const database = getFirebaseDatabase()
     const testimonialRef = ref(database, "testimonials")
-
     const q = query(testimonialRef, orderByChild("createdAt"), limitToLast(10))
 
     const unsubscribe = onValue(q, (snapshot) => {
@@ -112,9 +110,7 @@ export default function Testimonials() {
 
     setSubmitting(true)
     try {
-      const database = getFirebaseDatabase()
       const testimonialsRef = ref(database, "testimonials")
-
       await push(testimonialsRef, {
         author: formData.author,
         role: formData.role,

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getDatabase, Database } from "firebase/database"
+import { getDatabase } from "firebase/database"
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -11,19 +11,5 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 }
 
-let database: Database | null = null
-
-const getFirebaseDatabase = (): Database => {
-  if (typeof window === "undefined") {
-    throw new Error("Firebase can only be used in the browser")
-  }
-  
-  if (!database) {
-    const app = initializeApp(firebaseConfig)
-    database = getDatabase(app)
-  }
-  
-  return database
-}
-
-export { getFirebaseDatabase }
+const app = initializeApp(firebaseConfig)
+export const database = getDatabase(app)
