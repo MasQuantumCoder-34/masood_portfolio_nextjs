@@ -15,47 +15,46 @@ export default function Contact() {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  setFormData({
-    ...formData,
-    [e.target.name]: e.target.value,
-  })
-  setSubmitStatus("idle")
-}
-
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-  
-  if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-    setSubmitStatus("error")
-    return
-  }
-
-  setIsSubmitting(true)
-  try {
-    const response = await fetch("https://formspree.io/f/mrbnldab", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     })
-
-    if (response.ok) {
-      setSubmitStatus("success")
-      setFormData({ name: "", email: "", subject: "", message: "" })
-    } else {
-      setSubmitStatus("error")
-    }
-  } catch (error) {
-    setSubmitStatus("error")
-  } finally {
-    setIsSubmitting(false)
+    setSubmitStatus("idle")
   }
-}
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      setSubmitStatus("error")
+      return
+    }
+
+    setIsSubmitting(true)
+    try {
+      const response = await fetch("https://formspree.io/f/mrbnldab", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setSubmitStatus("success")
+        setFormData({ name: "", email: "", subject: "", message: "" })
+      } else {
+        setSubmitStatus("error")
+      }
+    } catch (error) {
+      setSubmitStatus("error")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   const contactLinks = [
-    { name: "GitHub", href: "#", icon: Github },
+    { name: "GitHub", href: "https://github.com/MasQuantumCoder-34", icon: Github },
     { name: "LinkedIn", href: "https://linkedin.com/in/mohammedmasoodazhar-v", icon: Linkedin },
     { name: "Phone", href: "tel:+916381653050", icon: Phone },
     { name: "Email", href: "mailto:mohammed.masood6400@gmail.com", icon: Mail },

@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app"
+import { initializeApp, type FirebaseApp } from "firebase/app"
 import { getDatabase, Database } from "firebase/database"
 
 const firebaseConfig = {
@@ -11,18 +11,20 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 }
 
+const hasFirebaseConfig = Object.values(firebaseConfig).every(Boolean)
+
+let app: FirebaseApp | null = null
 let database: Database | null = null
 
-const getFirebaseDatabase = (): Database => {
-  if (typeof window === "undefined") {
-    throw new Error("Firebase can only be used in the browser")
-  }
-  
+const getFirebaseDatabase = (): Database | null => {
+  if (typeof window === "undefined") return null
+  if (!hasFirebaseConfig) return null
+
   if (!database) {
-    const app = initializeApp(firebaseConfig)
+    app = initializeApp(firebaseConfig)
     database = getDatabase(app)
   }
-  
+
   return database
 }
 

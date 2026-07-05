@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { ref, push, query, orderByChild, limitToLast, onValue } from "firebase/database"
 import { getFirebaseDatabase } from "@/lib/firebase"
-import { X, CheckCircle, AlertCircle } from "lucide-react"
+import { CheckCircle, AlertCircle } from "lucide-react"
 
 interface Testimonial {
   id: string
@@ -73,6 +73,8 @@ export default function Testimonials() {
     useEffect(() => {
     try {
       const database = getFirebaseDatabase()
+      if (!database) return
+
       const testimonialRef = ref(database, "testimonials")
 
       const q = query(testimonialRef, orderByChild("createdAt"), limitToLast(10))
@@ -92,7 +94,6 @@ export default function Testimonials() {
 
       return () => unsubscribe()
     } catch (error) {
-      console.error("Firebase initialization error:", error)
       return () => {}
     }
   }, [])
@@ -116,9 +117,14 @@ export default function Testimonials() {
       return
     }
 
+    const database = getFirebaseDatabase()
+    if (!database) {
+      addToast("error", "Database not configured. Please set up Firebase.")
+      return
+    }
+
     setSubmitting(true)
     try {
-      const database = getFirebaseDatabase()
       const testimonialsRef = ref(database, "testimonials")
 
       await push(testimonialsRef, {
@@ -134,7 +140,6 @@ export default function Testimonials() {
       setShowForm(false)
       addToast("success", "Thank you! Your review will be displayed shortly.")
     } catch (error) {
-      console.error("Error submitting testimonial:", error)
       addToast("error", "Error submitting review. Please try again.")
     } finally {
       setSubmitting(false)

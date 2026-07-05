@@ -1,6 +1,13 @@
 "use client"
 
 export default function About() {
+  const achievements = [
+    { label: "Projects Delivered", value: "5", icon: "🚀" },
+    { label: "Clients Served", value: "3", icon: "🤝" },
+    { label: "Technologies Used", value: "10+", icon: "⚡" },
+    { label: "Certifications", value: "2", icon: "🏆" },
+  ]
+
   const timelineItems = [
     {
       year: "2024",
@@ -36,6 +43,17 @@ export default function About() {
           I combine creative thinking with technical expertise to build digital solutions that not only look beautiful
           but perform exceptionally.
         </p>
+
+        {/* Achievements */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+          {achievements.map((item, i) => (
+            <div key={i} className="glass rounded-2xl p-6 text-center hover:bg-white/15 transition-all duration-300 transform hover:-translate-y-1">
+              <div className="text-3xl mb-2">{item.icon}</div>
+              <div className="text-2xl font-bold gradient-text">{item.value}</div>
+              <div className="text-sm text-foreground/60 mt-1">{item.label}</div>
+            </div>
+          ))}
+        </div>
 
         {/* Timeline */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

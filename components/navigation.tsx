@@ -2,10 +2,18 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { useTheme } from "next-themes"
+import { Sun, Moon } from "lucide-react"
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState<string>("")
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,12 +88,23 @@ export default function Navigation() {
           ))}
         </div>
 
-        <Link
-          href="#contact"
-          className="px-6 py-2 rounded-full bg-gradient-to-r from-accent to-primary text-accent-foreground font-semibold hover:shadow-lg hover:shadow-accent/40 transition-all duration-300"
-        >
-          Contact
-        </Link>
+        <div className="flex items-center gap-3">
+          {mounted && (
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-full border border-white/20 hover:bg-white/10 transition-all duration-300 text-foreground/70 hover:text-accent"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+          )}
+          <Link
+            href="#contact"
+            className="px-6 py-2 rounded-full bg-gradient-to-r from-accent to-primary text-accent-foreground font-semibold hover:shadow-lg hover:shadow-accent/40 transition-all duration-300"
+          >
+            Contact
+          </Link>
+        </div>
       </div>
     </nav>
   )

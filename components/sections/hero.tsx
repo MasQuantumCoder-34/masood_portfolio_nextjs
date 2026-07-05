@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { Download } from "lucide-react"
 
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -53,19 +54,26 @@ export default function Hero() {
             View My Work
           </button>
           <button 
-           onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             className="px-8 py-4 rounded-full border-2 border-accent text-accent font-bold text-lg hover:bg-accent/10 transition-all duration-300"
           >
             Get In Touch
           </button>
-
+          <a
+            href="/resume.pdf"
+            download
+            className="px-8 py-4 rounded-full border border-white/20 text-foreground/80 font-bold text-lg hover:bg-white/10 hover:text-accent transition-all duration-300 flex items-center gap-2"
+          >
+            <Download className="w-5 h-5" />
+            Resume
+          </a>
         </div>
 
         {/* Floating cards with stats */}
         <div className="grid grid-cols-3 gap-4 mt-20 md:gap-8">
           {[
-            { label: "Projects", value: "5+" },
-            { label: "Experience", value: "1+ Years" },
+            { label: "Projects", value: "5" },
+            { label: "Experience", value: "1+ Year" },
             { label: "Technologies", value: "10+" },
           ].map((stat, i) => (
             <div key={i} className="glass rounded-2xl p-6 float-delayed" style={{ animationDelay: `${i * 0.5}s` }}>
