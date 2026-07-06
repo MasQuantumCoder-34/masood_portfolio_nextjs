@@ -2,12 +2,49 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
+// @ts-ignore: CSS module declarations not present in this environment
 import "./globals.css"
 
+const baseUrl = "https://masood-portfolio-nextjs.vercel.app"
+
 export const metadata: Metadata = {
-  title: "Mohammed Azhar | Front-End Developer",
+  title: {
+    default: "Mohammed Azhar | Front-End Developer",
+    template: "%s | Mohammed Azhar",
+  },
   description:
-    "Associate Software Developer specializing in React and TypeScript. Building responsive UIs and optimizing state management for healthcare applications.",
+    "Associate Software Developer specializing in React, TypeScript, and Next.js. Building responsive UIs and optimizing state management for healthcare and enterprise applications.",
+  keywords: [
+    "Front-End Developer",
+    "React Developer",
+    "TypeScript",
+    "Next.js",
+    "UI Developer",
+    "Mohammed Azhar",
+    "Web Developer",
+    "Portfolio",
+  ],
+  authors: [{ name: "Mohammed Masood Azhar" }],
+  creator: "Mohammed Masood Azhar",
+  metadataBase: new URL(baseUrl),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Mohammed Azhar | Front-End Developer",
+    description:
+      "Associate Software Developer specializing in React, TypeScript, and Next.js. Building responsive UIs for healthcare and enterprise applications.",
+    url: baseUrl,
+    siteName: "Mohammed Azhar Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mohammed Azhar | Front-End Developer",
+    description:
+      "Associate Software Developer specializing in React, TypeScript, and Next.js.",
+  },
   icons: {
     icon: "/icon.svg",
   },
