@@ -1,77 +1,83 @@
 "use client"
 
 export default function About() {
-  const achievements = [
-    { label: "Projects Delivered", value: "5", icon: "🚀" },
-    { label: "Clients Served", value: "3", icon: "🤝" },
-    { label: "Technologies Used", value: "10+", icon: "⚡" },
-    { label: "Certifications", value: "2", icon: "🏆" },
-  ]
-
   const timelineItems = [
     {
-      year: "2024",
+      period: "May 2026 — Present",
+      title: "Operations Executive (Zomato Process)",
+      organization: "Startek",
+      description:
+        "Joined on May 27, 2026. Managing operational execution, process compliance, performance metrics, and structured cross-functional issue resolution for the Zomato process to maintain consistent daily service delivery.",
+    },
+    {
+      period: "Oct 2025 — May 2026",
+      title: "Freelance Front-End Engineer",
+      organization: "Independent Engineering & Client Delivery",
+      description:
+        "Delivered production web applications and commercial platforms for clients, including the VNB Diapers e-commerce storefront (live catalog sync, instant sizing, WhatsApp order routing) and responsive CRM dashboards built with React, Next.js, and TypeScript.",
+    },
+    {
+      period: "Jul 2024 — Sep 2025",
       title: "Associate Software Developer (Front-End)",
-      company: "DataTerrain Private Limited, Chennai",
-      description: "Built and maintained responsive UI components using React.js and TypeScript. Optimized state management using Redux and RTK Query, reducing API redundancy by 30%. Collaborated in Agile teams on multiple healthcare projects.",
+      organization: "DataTerrain Private Limited • Chennai",
+      description:
+        "Completed tenure in September 2025. Engineered responsive healthcare front-end systems using React.js and TypeScript. Architected state management pipelines with Redux Toolkit and RTK Query, cutting client API redundancy by 30% across data-heavy clinical workflows.",
     },
     {
-      year: "2024",
-      title: "On-site Internship",
-      company: "IWAVY Technology Solutions",
-      description: "Worked on Employee Payroll Management System using HTML, CSS, JavaScript, PHP, and MySQL. Designed and maintained dynamic web pages and improved database efficiency.",
+      period: "2024",
+      title: "Front-End & Full-Stack Internship",
+      organization: "IWAVY Technology Solutions",
+      description:
+        "Engineered core modules for an internal Employee Payroll Management system. Implemented responsive dynamic components and database queries with PHP and MySQL.",
     },
     {
-      year: "2024",
-      title: "E-commerce Website (Final Year Project)",
-      company: "Islamiah College (Autonomous)",
-      description: "Built a responsive mini e-commerce site with product and cart modules using HTML, CSS, JavaScript, and PHP.",
-    },
-    {
-      year: "2024",
-      title: "B.Sc. Computer Science Graduate",
-      company: "Islamiah College (Autonomous), Vaniyambadi",
-      description: "Graduated with First Class Distinction (July 2021 - May 2024). Specialized in web development and software engineering.",
+      period: "2021 — 2024",
+      title: "B.Sc. Computer Science",
+      organization: "Islamiah College (Autonomous) • Vaniyambadi",
+      description:
+        "Graduated with First Class Distinction. Specialized in modern web application architecture, algorithmic problem solving, and software engineering principles.",
     },
   ]
 
   return (
-    <section id="about" className="relative py-24 px-6 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-5xl md:text-6xl font-bold mb-4 gradient-text">About Me</h2>
-        <p className="text-lg text-foreground/70 mb-16 max-w-2xl">
-          I combine creative thinking with technical expertise to build digital solutions that not only look beautiful
-          but perform exceptionally.
-        </p>
-
-        {/* Achievements */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-          {achievements.map((item, i) => (
-            <div key={i} className="glass rounded-2xl p-6 text-center hover:bg-white/15 transition-all duration-300 transform hover:-translate-y-1">
-              <div className="text-3xl mb-2">{item.icon}</div>
-              <div className="text-2xl font-bold gradient-text">{item.value}</div>
-              <div className="text-sm text-foreground/60 mt-1">{item.label}</div>
-            </div>
-          ))}
+    <section id="about" className="relative py-28 px-6 border-b border-border">
+      <div className="max-w-4xl mx-auto w-full">
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 mb-16 pb-4 border-b border-border">
+          <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
+            Experience & Background
+          </h2>
+          <span className="font-mono text-xs sm:text-sm text-muted-foreground">
+            Career Timeline
+          </span>
         </div>
 
-        {/* Timeline */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {timelineItems.map((item, index) => (
-            <div
-              key={index}
-              className="glass rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 transform hover:-translate-y-2"
-            >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center text-accent-foreground font-bold">
-                  {index + 1}
-                </div>
-                <div className="flex-grow">
-                  <div className="text-sm font-semibold text-accent">{item.year}</div>
-                  <h3 className="text-xl font-bold text-foreground mt-2">{item.title}</h3>
-                  <p className="text-sm font-medium text-foreground/60 mt-1">{item.company}</p>
-                  <p className="text-foreground/70 mt-4">{item.description}</p>
-                </div>
+        {/* Narrative Intro */}
+        <div className="max-w-3xl mb-16">
+          <p className="text-lg sm:text-xl text-foreground/90 leading-relaxed font-normal">
+            Front-End Engineer with experience spanning enterprise software engineering at DataTerrain,
+            independent freelance application delivery, and operations execution at Startek. My engineering
+            focus remains building fast, accessible, and resilient web interfaces that solve real-world operational challenges.
+          </p>
+        </div>
+
+        {/* Timeline List */}
+        <div className="divide-y divide-border">
+          {timelineItems.map((item, idx) => (
+            <div key={idx} className="py-10 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">
+                {item.period}
+              </div>
+              <div className="md:col-span-3 space-y-2">
+                <h3 className="text-lg font-medium text-foreground tracking-tight">
+                  {item.title}
+                </h3>
+                <p className="font-mono text-xs text-muted-foreground">
+                  {item.organization}
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed pt-2">
+                  {item.description}
+                </p>
               </div>
             </div>
           ))}

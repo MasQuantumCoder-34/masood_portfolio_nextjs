@@ -9,23 +9,24 @@ const baseUrl = "https://masood-portfolio-nextjs.vercel.app"
 
 export const metadata: Metadata = {
   title: {
-    default: "Mohammed Azhar | Front-End Developer",
-    template: "%s | Mohammed Azhar",
+    default: "Mohammed Masood Azhar V | Front-End Engineer",
+    template: "%s | Mohammed Masood Azhar V",
   },
   description:
-    "Associate Software Developer specializing in React, TypeScript, and Next.js. Building responsive UIs and optimizing state management for healthcare and enterprise applications.",
+    "Front-End Engineer specializing in React, TypeScript, and modern Next.js. Building responsive, accessible UIs and optimizing state architecture.",
   keywords: [
     "Front-End Developer",
     "React Developer",
     "TypeScript",
     "Next.js",
     "UI Developer",
-    "Mohammed Azhar",
+    "Mohammed Masood Azhar",
+    "Mohammed Masood Azhar V",
     "Web Developer",
     "Portfolio",
   ],
-  authors: [{ name: "Mohammed Masood Azhar" }],
-  creator: "Mohammed Masood Azhar",
+  authors: [{ name: "Mohammed Masood Azhar V" }],
+  creator: "Mohammed Masood Azhar V",
   metadataBase: new URL(baseUrl),
   alternates: {
     canonical: "/",
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mohammed Azhar | Front-End Developer",
     description:
-      "Associate Software Developer specializing in React, TypeScript, and Next.js. Building responsive UIs for healthcare and enterprise applications.",
+      "Front-End Engineer specializing in React, TypeScript, and Next.js. Building responsive, accessible web interfaces.",
     url: baseUrl,
     siteName: "Mohammed Azhar Portfolio",
     locale: "en_US",
@@ -43,10 +44,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mohammed Azhar | Front-End Developer",
     description:
-      "Associate Software Developer specializing in React, TypeScript, and Next.js.",
+      "Front-End Engineer specializing in React, TypeScript, and Next.js.",
   },
   icons: {
-    icon: "/icon.svg",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
   },
 }
 
@@ -57,7 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`font-sans antialiased`}>
+      <body className="font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
         </ThemeProvider>

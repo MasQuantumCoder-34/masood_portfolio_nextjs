@@ -1,86 +1,64 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Download } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [])
+  const scrollToProjects = () => {
+    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
+  }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/10 opacity-30" />
-        <div
-          className="absolute w-96 h-96 rounded-full bg-gradient-to-r from-primary/30 to-accent/20 blur-3xl"
-          style={{
-            left: `${mousePosition.x - 192}px`,
-            top: `${mousePosition.y - 192}px`,
-            transition: "all 0.8s ease-out",
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        {/* Floating 3D-style text */}
-        <div className="space-y-6 mb-8">
-          <h1 className="text-7xl md:text-8xl font-bold tracking-tighter mb-4 float">
-            <span className="gradient-text">Mohammed</span>
-            <br />
-            Masood
-            <br />
-            <span className="text-accent">Azhar</span>
-          </h1>
-
-          <p className="text-xl md:text-2xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
-            Associate Software Developer (Front-End) | React & TypeScript Specialist | Building responsive UIs and optimizing state management for healthcare applications.
-          </p>
+    <section className="relative min-h-[82vh] flex flex-col justify-center px-6 pt-32 pb-16">
+      <div className="max-w-4xl mx-auto w-full">
+        {/* Editorial Eyebrow */}
+        <div className="mb-6">
+          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
+            Front-End Engineer • React & TypeScript Specialist
+          </span>
         </div>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
-          <button 
-            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-4 rounded-full bg-gradient-to-r from-accent to-primary text-accent-foreground font-bold text-lg hover:shadow-lg hover:shadow-accent/50 transition-all duration-300 hover:scale-105">
-            View My Work
-          </button>
-          <button 
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-4 rounded-full border-2 border-accent text-accent font-bold text-lg hover:bg-accent/10 transition-all duration-300"
+        {/* Display Headline */}
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-medium tracking-tight text-foreground leading-[1.05] mb-8">
+          Building fast, <br />
+          accessible React <br />
+          interfaces.
+        </h1>
+
+        {/* Outcome Subhead */}
+        <p className="text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed mb-12">
+          Front-End Engineer with enterprise experience at{" "}
+          <span className="text-foreground font-medium">DataTerrain</span> (cutting client API redundancy by 30% with RTK Query) and 
+          freelance storefront delivery for <span className="text-foreground font-medium">VNB Diapers</span>. Currently working at{" "}
+          <span className="text-foreground font-medium">Startek</span>.
+        </p>
+
+        {/* Action Row */}
+        <div className="flex items-center gap-8 mb-16">
+          <button
+            onClick={scrollToProjects}
+            className="inline-flex items-center gap-2 text-foreground font-medium text-sm sm:text-base hover:text-muted-foreground transition-colors group cursor-pointer"
           >
-            Get In Touch
+            <span>See selected work</span>
+            <span className="inline-block transition-transform duration-200 group-hover:translate-y-0.5">
+              ↓
+            </span>
           </button>
+
           <a
             href="/resume.pdf"
             download
-            className="px-8 py-4 rounded-full border border-white/20 text-foreground/80 font-bold text-lg hover:bg-white/10 hover:text-accent transition-all duration-300 flex items-center gap-2"
+            className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground text-sm sm:text-base transition-colors"
           >
-            <Download className="w-5 h-5" />
-            Resume
+            <span>Resume</span>
+            <ArrowUpRight className="w-4 h-4 text-muted-foreground/70" />
           </a>
         </div>
 
-        {/* Floating cards with stats */}
-        <div className="grid grid-cols-3 gap-4 mt-20 md:gap-8">
-          {[
-            { label: "Projects", value: "5" },
-            { label: "Experience", value: "1+ Year" },
-            { label: "Technologies", value: "10+" },
-          ].map((stat, i) => (
-            <div key={i} className="glass rounded-2xl p-6 float-delayed" style={{ animationDelay: `${i * 0.5}s` }}>
-              <div className="text-2xl font-bold gradient-text">{stat.value}</div>
-              <div className="text-sm text-foreground/60 mt-2">{stat.label}</div>
-            </div>
-          ))}
+        {/* Hairline Divider & Stack Line */}
+        <div className="pt-8 border-t border-border">
+          <p className="font-mono text-xs sm:text-sm text-muted-foreground/80 tracking-wide">
+            React · Next.js · TypeScript · Redux Toolkit · RTK Query · Tailwind CSS · Firebase
+          </p>
         </div>
       </div>
     </section>

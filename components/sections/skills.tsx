@@ -1,81 +1,64 @@
 "use client"
 
-import { useState } from "react"
-
 export default function Skills() {
-  const [activeCategory, setActiveCategory] = useState("frontend")
-
-  const skillsData = {
-    frontend: [
-      { name: "React", level: 90 },
-      { name: "TypeScript", level: 88 },
-      { name: "HTML/CSS", level: 92 },
-      { name: "JavaScript", level: 90 },
-      { name: "Tailwind CSS", level: 85 },
-      { name: "Redux/RTK Query", level: 88 },
-    ],
-    backend: [
-      { name: "Node.js (Learning)", level: 70 },
-      { name: "Express.js (Learning)", level: 70 },
-      { name: "PHP", level: 85 },
-      { name: "MySQL", level: 82 },
-      { name: "REST API", level: 88 },
-      { name: "State Management", level: 85 },
-    ],
-    tools: [
-      { name: "VS Code", level: 95 },
-      { name: "Git", level: 88 },
-      { name: "Agile/Scrum", level: 85 },
-      { name: "Cursor IDE", level: 90 },
-      { name: "IntelliJ IDEA", level: 80 },
-      { name: "Sublime Text", level: 80 },
-    ],
-  }
-
-  const categories = [
-    { id: "frontend", label: "Frontend" },
-    { id: "backend", label: "Backend" },
-    { id: "tools", label: "Tools & DevOps" },
+  const stackGroups = [
+    {
+      category: "01 / Core UI & Architecture",
+      description: "Building accessible, high-performance web front-ends with strict type safety.",
+      skills: ["React 19", "Next.js 16 (App Router)", "TypeScript", "HTML5", "CSS3 / Modern CSS"],
+    },
+    {
+      category: "02 / State & Data Fetching",
+      description: "Managing predictable asynchronous state, client cache invalidation, and server synchronization.",
+      skills: ["Redux Toolkit", "RTK Query", "TanStack Query", "REST APIs", "Firebase Realtime DB"],
+    },
+    {
+      category: "03 / Styling & Design Systems",
+      description: "Composing maintainable utility styling, design tokens, and accessible interactive primitives.",
+      skills: ["Tailwind CSS v4", "Radix UI", "shadcn/ui", "CSS Variables / OKLCH", "Responsive Layouts"],
+    },
+    {
+      category: "04 / Tooling & Workflow",
+      description: "Developer tooling, automated continuous integration, and version control discipline.",
+      skills: ["Git & GitHub", "Vercel", "Vite", "VS Code", "Agile / Scrum"],
+    },
   ]
 
   return (
-    <section id="skills" className="relative py-24 px-6">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-5xl md:text-6xl font-bold mb-4 gradient-text">Skills</h2>
-        <p className="text-lg text-foreground/70 mb-16 max-w-2xl">
-          A comprehensive toolkit built through years of experience and continuous learning.
-        </p>
-
-        {/* Category tabs */}
-        <div className="flex gap-4 mb-12 flex-wrap">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                activeCategory === cat.id
-                  ? "bg-gradient-to-r from-accent to-primary text-accent-foreground shadow-lg shadow-accent/40"
-                  : "glass hover:bg-white/15"
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
+    <section id="skills" className="relative py-28 px-6 border-b border-border">
+      <div className="max-w-4xl mx-auto w-full">
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 mb-16 pb-4 border-b border-border">
+          <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
+            Technical Stack
+          </h2>
+          <span className="font-mono text-xs sm:text-sm text-muted-foreground">
+            Capabilities & Systems
+          </span>
         </div>
 
-        {/* Skills grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {skillsData[activeCategory as keyof typeof skillsData].map((skill, index) => (
-            <div key={index} className="group">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg font-semibold text-foreground">{skill.name}</h3>
-                <span className="text-sm font-bold text-accent">{skill.level}%</span>
-              </div>
-              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-accent to-primary rounded-full transition-all duration-1000 ease-out"
-                  style={{ width: `${skill.level}%` }}
-                />
+        {/* Stack Map Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {stackGroups.map((group) => (
+            <div
+              key={group.category}
+              className="p-6 rounded-lg border border-border bg-card/40 space-y-4 hover:border-border-strong transition-colors"
+            >
+              <h3 className="font-mono text-xs text-foreground uppercase tracking-wider font-semibold">
+                {group.category}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {group.description}
+              </p>
+              <div className="flex flex-wrap gap-2 pt-2">
+                {group.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-2.5 py-1 rounded bg-secondary/60 text-secondary-foreground text-xs font-mono border border-border"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
           ))}

@@ -17,12 +17,12 @@ export default function BackToTop() {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className={`fixed bottom-8 right-8 z-40 p-3 rounded-full bg-gradient-to-r from-accent to-primary text-accent-foreground shadow-lg hover:shadow-accent/50 transition-all duration-300 hover:scale-110 ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+      className={`fixed bottom-8 right-8 z-40 p-2.5 rounded-full bg-foreground text-background shadow-lg transition-all duration-200 cursor-pointer ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3 pointer-events-none"
       }`}
       aria-label="Back to top"
     >
-      <ArrowUp className="w-5 h-5" />
+      <ArrowUp className="w-4 h-4" />
     </button>
   )
 }

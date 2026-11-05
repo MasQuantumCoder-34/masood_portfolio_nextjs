@@ -1,27 +1,27 @@
 "use client"
 
-import { ExternalLink, Github, Star, GitFork } from "lucide-react"
+import { ArrowUpRight, Github, Star, GitFork } from "lucide-react"
 
 const repos = [
   {
-    name: "Mass Portfolio",
-    description: "Personal portfolio built with Next.js, TypeScript, and Tailwind CSS showcasing projects and skills.",
-    stars: "2",
-    forks: "0",
-    language: "TypeScript",
-    url: "https://github.com/MasQuantumCoder-34",
-  },
-  {
-    name: "MufarTech Website",
-    description: "Company website with modern UI/UX, responsive layouts, and service showcase.",
+    name: "central-enterprises-diaper-ecommerce-",
+    description: "Storefront web application for VNB Diapers, featuring real-time Render API sync and WhatsApp order dispatch.",
     stars: "1",
     forks: "0",
     language: "TypeScript",
-    url: "https://github.com/MasQuantumCoder-34",
+    url: "https://github.com/MasQuantumCoder-34/central-enterprises-diaper-ecommerce-",
   },
   {
-    name: "Mufar Tech CRM",
-    description: "Customer relationship management dashboard with tracking, pipeline, and reporting.",
+    name: "masood_portfolio_nextjs",
+    description: "Personal developer portfolio built with Next.js 16, React 19, TypeScript, and editorial minimalism.",
+    stars: "2",
+    forks: "0",
+    language: "TypeScript",
+    url: "https://github.com/MasQuantumCoder-34/masood_portfolio_nextjs",
+  },
+  {
+    name: "MufarTech Website",
+    description: "Commercial agency website built with responsive Next.js and Tailwind CSS.",
     stars: "1",
     forks: "0",
     language: "TypeScript",
@@ -31,60 +31,62 @@ const repos = [
 
 export default function OpenSource() {
   return (
-    <section className="relative py-24 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex items-center gap-3 mb-4">
-          <Github className="w-8 h-8 text-accent" />
-          <h2 className="text-5xl md:text-6xl font-bold gradient-text">Open Source</h2>
+    <section className="relative py-28 px-6 border-b border-border">
+      <div className="max-w-4xl mx-auto w-full">
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 mb-16 pb-4 border-b border-border">
+          <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
+            Open Source
+          </h2>
+          <a
+            href="https://github.com/MasQuantumCoder-34"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Github className="w-3.5 h-3.5" />
+            <span>github.com/MasQuantumCoder-34 ↗</span>
+          </a>
         </div>
-        <p className="text-lg text-foreground/70 mb-16 max-w-2xl">
-          Projects I&apos;ve built and published on GitHub. Contributions and collaborations welcome.
-        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Repositories List */}
+        <div className="divide-y divide-border">
           {repos.map((repo, i) => (
             <a
               key={i}
               href={repo.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass rounded-2xl p-6 hover:bg-white/15 transition-all duration-300 transform hover:-translate-y-2 group"
+              className="py-6 first:pt-0 last:pb-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 group cursor-pointer"
             >
-              <div className="flex items-start justify-between mb-4">
-                <h3 className="font-bold text-foreground group-hover:text-accent transition-colors">
-                  {repo.name}
-                </h3>
-                <ExternalLink className="w-4 h-4 text-foreground/40 group-hover:text-accent transition-colors" />
+              <div className="space-y-1 max-w-xl">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-mono text-sm font-medium text-foreground group-hover:text-muted-foreground transition-colors">
+                    {repo.name}
+                  </h3>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {repo.description}
+                </p>
               </div>
-              <p className="text-sm text-foreground/70 mb-4 line-clamp-2">{repo.description}</p>
-              <div className="flex items-center gap-4 text-xs text-foreground/50">
-                <span className="flex items-center gap-1">
-                  <span className="w-2.5 h-2.5 rounded-full bg-blue-400" />
+
+              <div className="flex items-center gap-4 text-xs font-mono text-muted-foreground flex-shrink-0">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-blue-500" />
                   {repo.language}
                 </span>
                 <span className="flex items-center gap-1">
-                  <Star className="w-3.5 h-3.5" />
+                  <Star className="w-3.5 h-3.5 text-muted-foreground" />
                   {repo.stars}
                 </span>
                 <span className="flex items-center gap-1">
-                  <GitFork className="w-3.5 h-3.5" />
+                  <GitFork className="w-3.5 h-3.5 text-muted-foreground" />
                   {repo.forks}
                 </span>
               </div>
             </a>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <a
-            href="https://github.com/MasQuantumCoder-34"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-accent to-primary text-accent-foreground font-bold hover:shadow-lg hover:shadow-accent/50 transition-all duration-300 hover:scale-105"
-          >
-            <Github className="w-5 h-5" />
-            View All on GitHub
-          </a>
         </div>
       </div>
     </section>

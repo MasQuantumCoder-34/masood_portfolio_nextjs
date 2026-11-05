@@ -1,147 +1,214 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { ArrowUpRight, Lock, ExternalLink } from "lucide-react"
 
-function ImageSlideshow({ images, alt }: { images: string[]; alt: string }) {
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % images.length)
-  }, [images.length])
-
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 3000)
-    return () => clearInterval(interval)
-  }, [nextSlide])
-
-  return (
-    <div className="relative h-full w-full">
-      {images.map((src, i) => (
-        <img
-          key={src}
-          src={src}
-          alt={`${alt} - ${i + 1}`}
-          className="w-full h-full object-cover absolute inset-0 transition-opacity duration-700"
-          style={{ opacity: i === currentIndex ? 1 : 0 }}
-        />
-      ))}
-    </div>
-  )
+interface ProjectItem {
+  id: string
+  title: string
+  subtitle: string
+  problem: string
+  outcome: string
+  tags: string[]
+  image: string
+  link?: string
+  confidential?: boolean
 }
 
 export default function Projects() {
-  const projects = [
+  const projects: ProjectItem[] = [
     {
-      title: "MufarTech Website",
-      description: "Company website showcasing services, portfolio, and brand presence with modern UI/UX design and responsive layouts.",
-      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-      images: ["/mufar_tech_1.png", "/mufar_tech_2.png"],
-      link: "https://mufartech-website.vercel.app",
-      featured: true,
+      id: "01",
+      title: "VNB Diapers Storefront",
+      subtitle: "Babies & Adult Incontinence Care E-Commerce Platform",
+      problem:
+        "Wholesale & retail distributor needed a zero-friction mobile-first web storefront with live inventory sync and structured order dispatch.",
+      outcome:
+        "Shipped responsive React/TypeScript storefront syncing 38+ SKUs via TanStack Query and Render backend, with instant variant sizing (NB to XXL) and direct WhatsApp enquiry routing.",
+      tags: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "TanStack Query", "MongoDB"],
+      image: "/vnb-diapers.jpg",
+      link: "https://vnbdiaper.vercel.app/",
     },
     {
+      id: "02",
+      title: "MufarTech Website",
+      subtitle: "Commercial Brand & Service Showcase Platform",
+      problem:
+        "Client required a modern agency website with high visual polish, brand presence, and responsive multi-device fidelity.",
+      outcome:
+        "Built and deployed a mobile-first Next.js web application achieving 95+ PageSpeed scores, optimized SEO metadata, and zero layout shift.",
+      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+      image: "/mufar_tech_1.png",
+      link: "https://mufartech-website.vercel.app",
+    },
+    {
+      id: "03",
       title: "Mufar Tech Tasks",
-      description: "Task management application for organizing, tracking, and collaborating on projects with real-time updates.",
-      tags: ["React", "TypeScript", "Task Management", "UI/UX"],
-      images: ["/task_1.png", "/task_2.png", "/task_3.png"],
+      subtitle: "Real-Time Project & Team Task Tracker",
+      problem:
+        "Internal team struggled with fragmented spreadsheet task tracking and slow status visibility.",
+      outcome:
+        "Engineered real-time collaborative task manager with instant status transitions, filtering, and responsive state handling.",
+      tags: ["React", "TypeScript", "State Management", "Tailwind CSS"],
+      image: "/task_1.png",
       link: "https://mufar-tech-tasks.vercel.app",
     },
     {
+      id: "04",
       title: "Mufar Tech Forms",
-      description: "Dynamic form builder and submission platform with validation, data collection, and analytics capabilities.",
-      tags: ["React", "TypeScript", "Forms", "Validation"],
-      images: ["/forms_1.png", "/forms_2.png"],
+      subtitle: "Dynamic Form Builder & Data Collection Engine",
+      problem:
+        "Needed flexible online form generation with schema validation and automated submission tracking.",
+      outcome:
+        "Constructed client-side form builder featuring real-time input validation, accessible controls, and resilient data serialization.",
+      tags: ["React", "TypeScript", "Form Validation", "Radix UI"],
+      image: "/forms_1.png",
       link: "https://mufar-tech-forms.vercel.app",
-      featured: true,
     },
     {
+      id: "05",
       title: "Mufar Tech CRM",
-      description: "Customer relationship management system with contact tracking, sales pipeline, and reporting features.",
-      tags: ["React", "TypeScript", "CRM", "Dashboard"],
-      images: ["/crm_1.png", "/crm_2.png", "/crm_3.png"],
+      subtitle: "Customer Relationship & Sales Pipeline Dashboard",
+      problem:
+        "Sales reps required clear pipeline visualization and customer lead history tracking.",
+      outcome:
+        "Developed analytics and CRM pipeline views with contact management, deal stages, and intuitive dashboard UI.",
+      tags: ["React", "TypeScript", "CRM", "Dashboard UI"],
+      image: "/crm_1.png",
       link: "https://mufar-tech-crm.vercel.app",
     },
     {
+      id: "06",
       title: "Mufar Central Enterprises",
-      description: "A full-stack enterprise management solution built for a private client. Includes inventory tracking, billing, employee management, and reporting modules. Project details are confidential per client agreement.",
+      subtitle: "Confidential Enterprise Management System",
+      problem:
+        "Private commercial client needed unified ERP architecture for multi-department billing, inventory, and workforce management.",
+      outcome:
+        "Delivered full-stack ERP architecture with PostgreSQL schema and role-based permissions. Case details available under NDA.",
       tags: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS"],
-      images: ["/premium-ecommerce-interface.jpg", "/cloud-storage-interface.jpg"],
+      image: "/premium-ecommerce-interface.jpg",
       confidential: true,
-      featured: true,
     },
   ]
 
   return (
-    <section id="projects" className="relative py-24 px-6">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-5xl md:text-6xl font-bold mb-4 gradient-text">Featured Projects</h2>
-        <p className="text-lg text-foreground/70 mb-16 max-w-2xl">
-          Innovative projects showcasing modern design patterns and cutting-edge technologies.
-        </p>
+    <section id="projects" className="relative py-28 px-6 border-b border-border">
+      <div className="max-w-4xl mx-auto w-full">
+        {/* Editorial Section Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 mb-16 pb-4 border-b border-border">
+          <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
+            Selected work
+          </h2>
+          <span className="font-mono text-xs sm:text-sm text-muted-foreground">
+            2024 — 2026
+          </span>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-max">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className={`group glass rounded-2xl overflow-hidden hover:bg-white/15 transition-all duration-300 transform hover:-translate-y-2 ${
-                project.featured ? "md:col-span-2 lg:col-span-1" : ""
-              }`}
-              style={{
-                animationDelay: `${index * 0.1}s`,
-              }}
-            >
-              {project.confidential ? (
-                <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20">
-                  <ImageSlideshow images={project.images} alt={project.title} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                </div>
-              ) : (
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="block relative h-48 overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20">
-                  <ImageSlideshow images={project.images} alt={project.title} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </a>
-              )}
-
-              <div className="p-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <h3 className="text-xl font-bold text-foreground">{project.title}</h3>
-                  {project.confidential && (
-                    <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/50">
-                      Confidential
+        {/* Case Study List */}
+        <div className="divide-y divide-border">
+          {projects.map((project) => (
+            <article key={project.id} className="py-12 first:pt-0 last:pb-0 group">
+              <div className="flex flex-col md:flex-row gap-8 items-start justify-between">
+                {/* Left Meta & Description */}
+                <div className="flex-1 space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-xs text-muted-foreground">
+                      {project.id}
                     </span>
-                  )}
-                </div>
-                <p className="text-sm text-foreground/70 mb-4">{project.description}</p>
+                    <h3 className="text-xl sm:text-2xl font-medium text-foreground tracking-tight">
+                      {project.title}
+                    </h3>
+                    {project.confidential && (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono bg-zinc-800 text-zinc-400 border border-border">
+                        <Lock className="w-3 h-3" />
+                        Confidential
+                      </span>
+                    )}
+                  </div>
 
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 text-xs font-semibold rounded-full bg-gradient-to-r from-accent/30 to-primary/30 text-accent border border-accent/50 hover:border-accent transition-all duration-300"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
+                    {project.subtitle}
+                  </p>
+
+                  <div className="space-y-2 text-sm text-muted-foreground leading-relaxed">
+                    <p>
+                      <strong className="text-foreground/90 font-medium">Problem:</strong>{" "}
+                      {project.problem}
+                    </p>
+                    <p>
+                      <strong className="text-foreground/90 font-medium">Outcome:</strong>{" "}
+                      {project.outcome}
+                    </p>
+                  </div>
+
+                  {/* Stack line */}
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 pt-2 font-mono text-xs text-muted-foreground/70">
+                    {project.tags.map((tag, i) => (
+                      <span key={tag}>
+                        {tag}
+                        {i < project.tags.length - 1 && " •"}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Direct Link Action */}
+                  <div className="pt-4">
+                    {project.confidential ? (
+                      <a
+                        href="#contact"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        <span>Request case study details</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </a>
+                    ) : (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors group/link cursor-pointer"
+                      >
+                        <span>Visit live website</span>
+                        <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                      </a>
+                    )}
+                  </div>
                 </div>
 
-                {!project.confidential && (
-                  <div className="flex items-center gap-3 mt-6">
-                    <span className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-full bg-green-500/15 text-green-400 border border-green-500/40">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                      Live
-                    </span>
+                {/* Right Interactive Screenshot Preview */}
+                <div className="w-full md:w-72 flex-shrink-0">
+                  {project.confidential ? (
+                    <div className="relative aspect-[16/10] rounded-lg overflow-hidden border border-border bg-card">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover grayscale opacity-60"
+                      />
+                      <div className="absolute inset-0 bg-background/50 flex items-center justify-center">
+                        <Lock className="w-6 h-6 text-muted-foreground" />
+                      </div>
+                    </div>
+                  ) : (
                     <a
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm font-semibold text-accent hover:text-primary transition-colors duration-300"
+                      className="block relative aspect-[16/10] rounded-lg overflow-hidden border border-border bg-card group/img cursor-pointer"
+                      title={`Open ${project.title}`}
                     >
-                      View Project →
+                      <img
+                        src={project.image}
+                        alt={`${project.title} screenshot`}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/30 opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-2 text-white text-xs font-medium backdrop-blur-[2px]">
+                        <span>Open website</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </div>
                     </a>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
