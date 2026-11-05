@@ -1,129 +1,160 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
-import { Sun, Moon } from "lucide-react"
+import { Volume2, VolumeX, Terminal, Sparkles, Compass } from "lucide-react"
+import { playSound, toggleAudioMute, isAudioMuted } from "@/components/sound/audio-engine"
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState<string>("")
-  const { theme, setTheme, resolvedTheme } = useTheme()
+  const [activeSection, setActiveSection] = useState<string>("hero")
+  const [muted, setMuted] = useState(true)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-  }, [])
+    setMuted(isAudioMuted())
 
-  useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30)
+      setScrolled(window.scrollY > 40)
     }
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   useEffect(() => {
-    const sections = ["projects", "skills", "about", "testimonials", "contact"]
+    const sections = ["hero", "philosophy", "projects", "sandbox", "architecture", "timeline", "connect"]
 
     const observers = sections.map((id) => {
-      const element = document.getElementById(id)
-      if (!element) return null
-
+      const el = document.getElementById(id)
+      if (!el) return null
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
             setActiveSection(id)
           }
         },
-        { threshold: 0.25 }
+        { threshold: 0.2 }
       )
-
-      observer.observe(element)
+      observer.observe(el)
       return observer
     })
 
     return () => {
-      observers.forEach((observer) => observer && observer.disconnect())
+      observers.forEach((o) => o?.disconnect())
     }
   }, [])
 
-  const navItems = [
-    { name: "Work", href: "#projects", id: "projects" },
-    { name: "Stack", href: "#skills", id: "skills" },
-    { name: "About", href: "#about", id: "about" },
-    { name: "Contact", href: "#contact", id: "contact" },
+  const handleMuteToggle = () => {
+    const nowMuted = toggleAudioMute()
+    setMuted(nowMuted)
+    if (!nowMuted) {
+      playSound("chord")
+    }
+  }
+
+  const openTerminal = () => {
+    playSound("snap")
+    window.dispatchEvent(new CustomEvent("open-cli-drawer"))
+  }
+
+  const navLinks = [
+    { label: "WORK", href: "#projects", id: "projects" },
+    { label: "SANDBOX", href: "#sandbox", id: "sandbox" },
+    { label: "ARCHITECTURE", href: "#architecture", id: "architecture" },
+    { label: "TIMELINE", href: "#timeline", id: "timeline" },
+    { label: "CONNECT", href: "#connect", id: "connect" },
   ]
 
-  const isDark = mounted && (resolvedTheme ? resolvedTheme === "dark" : theme === "dark")
-
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-200 ${
-        scrolled
-          ? "bg-background/85 backdrop-blur-md border-b border-border py-3.5"
-          : "bg-transparent py-5"
-      }`}
-    >
-      <div className="max-w-4xl mx-auto px-6 flex items-center justify-between">
+    <header className="fixed top-4 left-0 w-full z-50 px-4 sm:px-6 pointer-events-none">
+      <div className="max-w-6xl mx-auto flex items-center justify-between pointer-events-auto">
+        {/* Brand Holographic Capsule */}
         <Link
-          href="#"
-          className="group flex items-center gap-2.5 transition-all flex-shrink-0"
+          href="#hero"
+          onClick={() => playSound("tick")}
+          className="group flex items-center gap-3 px-3.5 py-2 rounded-full bg-black/60 backdrop-blur-2xl border border-white/10 shadow-2xl hover:border-emerald-500/40 transition-all duration-300"
         >
-          {/* Stylized Monogram Brand Mark */}
-          <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-foreground text-background font-mono text-[11px] sm:text-xs font-bold flex items-center justify-center tracking-tight shadow-sm border border-border group-hover:scale-105 transition-transform duration-200 flex-shrink-0">
+          {/* Monogram Badge */}
+          <div className="w-7 h-7 rounded-lg bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center font-mono font-bold text-xs text-emerald-400 group-hover:scale-105 transition-transform">
             MA
-          </span>
+          </div>
 
-          {/* Full Name & Identity */}
           <div className="flex flex-col">
-            <div className="flex items-center gap-1.5 leading-none">
-              <span className="text-xs sm:text-sm font-semibold tracking-tight text-foreground group-hover:text-muted-foreground transition-colors whitespace-nowrap">
-                <span className="hidden sm:inline">Mohammed </span>Masood Azhar
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs sm:text-sm font-semibold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+                Mohammed Masood Azhar
               </span>
-              <span className="text-[9px] sm:text-[10px] font-mono font-medium px-1 py-0.5 rounded bg-muted text-muted-foreground border border-border">
+              <span className="font-mono text-[9px] px-1 py-0.2 rounded bg-white/10 text-zinc-300 border border-white/10 font-bold">
                 V
               </span>
             </div>
-            <span className="hidden sm:block text-[10px] font-mono text-muted-foreground tracking-wide mt-1">
-              Front-End Engineer
-            </span>
+            <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-400">
+              <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Available for Hire</span>
+            </div>
           </div>
         </Link>
 
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-6">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`relative text-xs font-mono transition-colors duration-150 ${
-                  activeSection === item.id
-                    ? "text-foreground font-semibold"
-                    : "text-muted-foreground hover:text-foreground"
+        {/* Center Floating Nav Links */}
+        <nav className="hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-2xl border border-white/10 shadow-2xl">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id
+            return (
+              <a
+                key={link.id}
+                href={link.href}
+                onMouseEnter={() => playSound("tick")}
+                className={`px-3 py-1.5 rounded-full font-mono text-xs transition-all duration-200 ${
+                  isActive
+                    ? "bg-white/15 text-white font-semibold shadow-inner"
+                    : "text-zinc-400 hover:text-white hover:bg-white/5"
                 }`}
               >
-                <span>{item.name}</span>
-                {activeSection === item.id && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-[1px] bg-foreground transition-all duration-200" />
-                )}
-              </Link>
-            ))}
-          </div>
+                {link.label}
+              </a>
+            )
+          })}
+        </nav>
 
-          {mounted && (
-            <button
-              onClick={() => setTheme(isDark ? "light" : "dark")}
-              className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded border border-transparent hover:border-border cursor-pointer"
-              aria-label="Toggle theme"
-              title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-            >
-              {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5 text-foreground" />}
-            </button>
-          )}
+        {/* Right Controls HUD */}
+        <div className="flex items-center gap-2">
+          {/* Audio Visualizer / Mute Toggle */}
+          <button
+            onClick={handleMuteToggle}
+            className={`flex items-center gap-2 px-3 py-2 rounded-full border backdrop-blur-2xl font-mono text-xs transition-all cursor-pointer ${
+              muted
+                ? "bg-black/60 border-white/10 text-zinc-400 hover:text-white"
+                : "bg-emerald-500/15 border-emerald-500/40 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.2)]"
+            }`}
+            title={muted ? "Enable Audio Micro-Haptics" : "Mute Sound"}
+          >
+            {muted ? (
+              <VolumeX className="w-3.5 h-3.5" />
+            ) : (
+              <div className="flex items-end gap-[2px] h-3.5">
+                <span className="w-[2px] h-2 bg-emerald-400 animate-pulse" />
+                <span className="w-[2px] h-3.5 bg-emerald-400 animate-pulse delay-75" />
+                <span className="w-[2px] h-2.5 bg-emerald-400 animate-pulse delay-150" />
+              </div>
+            )}
+            <span className="hidden sm:inline text-[11px] font-bold">
+              {muted ? "SFX OFF" : "SFX ON"}
+            </span>
+          </button>
+
+          {/* Interactive Developer CLI Drawer Trigger */}
+          <button
+            onClick={openTerminal}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-black/60 border border-white/10 hover:border-emerald-500/40 text-white font-mono text-xs backdrop-blur-2xl transition-all cursor-pointer group shadow-xl active:scale-95"
+            title="Press ~ key to open interactive CLI drawer"
+          >
+            <Terminal className="w-3.5 h-3.5 text-emerald-400 group-hover:rotate-12 transition-transform" />
+            <span className="font-bold hidden sm:inline">[~] CLI</span>
+          </button>
         </div>
       </div>
-    </nav>
+    </header>
   )
 }

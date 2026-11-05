@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
-import { soundFx } from "@/components/sound/audio-engine"
+import React, { useEffect, useState, useRef } from "react"
+import { playSound, toggleAudioMute, isAudioMuted } from "@/components/sound/audio-engine"
 import TerminalDrawer from "@/components/ui/terminal-drawer"
 import { Volume2, VolumeX, Terminal as TerminalIcon } from "lucide-react"
 
@@ -13,6 +13,7 @@ export default function ClientProviders({ children }: { children: React.ReactNod
 
   useEffect(() => {
     setMounted(true)
+    setIsMuted(isAudioMuted())
 
     // Lenis Smooth Scroll Engine
     let lenisInstance: any
@@ -71,14 +72,15 @@ export default function ClientProviders({ children }: { children: React.ReactNod
     }
   }, [])
 
-  const toggleSound = () => {
-    const muted = soundFx.toggleMute()
+  const handleToggleSound = () => {
+    const muted = toggleAudioMute()
     setIsMuted(muted)
-    if (!muted) soundFx.playClickSnap()
+    if (!muted) playSound("chord")
   }
 
   const openTerminal = () => {
-    window.dispatchEvent(new KeyboardEvent("keydown", { key: "~" }))
+    playSound("snap")
+    window.dispatchEvent(new CustomEvent("open-cli-drawer"))
   }
 
   return (
@@ -87,10 +89,10 @@ export default function ClientProviders({ children }: { children: React.ReactNod
       <div
         ref={spotlightRef}
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 opacity-70"
+        className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 opacity-60"
         style={{
           background:
-            "radial-gradient(600px circle at var(--cursor-x, 50vw) var(--cursor-y, 50vh), rgba(16, 185, 129, 0.035), rgba(6, 182, 212, 0.02) 40%, transparent 80%)",
+            "radial-gradient(600px circle at var(--cursor-x, 50vw) var(--cursor-y, 50vh), rgba(16, 185, 129, 0.04), rgba(6, 182, 212, 0.02) 40%, transparent 80%)",
         }}
       />
 
@@ -98,9 +100,9 @@ export default function ClientProviders({ children }: { children: React.ReactNod
       {mounted && (
         <aside className="fixed bottom-6 left-6 z-40 flex items-center gap-2">
           <button
-            onClick={toggleSound}
-            onMouseEnter={() => soundFx.playHoverTick()}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-card/90 border border-border backdrop-blur-md text-xs font-mono text-muted-foreground hover:text-foreground transition-all shadow-md cursor-pointer"
+            onClick={handleToggleSound}
+            onMouseEnter={() => playSound("tick")}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-950/80 border border-white/10 backdrop-blur-xl text-xs font-mono text-zinc-400 hover:text-white transition-all shadow-xl cursor-pointer"
             aria-label="Toggle sound feedback"
             title={isMuted ? "Audio muted (Click to enable)" : "Audio enabled"}
           >
@@ -119,8 +121,8 @@ export default function ClientProviders({ children }: { children: React.ReactNod
 
           <button
             onClick={openTerminal}
-            onMouseEnter={() => soundFx.playHoverTick()}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-card/90 border border-border backdrop-blur-md text-xs font-mono text-muted-foreground hover:text-foreground transition-all shadow-md cursor-pointer"
+            onMouseEnter={() => playSound("tick")}
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-950/80 border border-white/10 backdrop-blur-xl text-xs font-mono text-zinc-400 hover:text-white transition-all shadow-xl cursor-pointer"
             title="Open Developer Shell (~)"
           >
             <TerminalIcon className="w-3 h-3 text-emerald-400" />

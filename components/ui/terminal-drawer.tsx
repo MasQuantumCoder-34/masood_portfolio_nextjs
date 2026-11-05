@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { soundFx } from "@/components/sound/audio-engine"
+import React, { useState, useEffect, useRef } from "react"
+import { playSound } from "@/components/sound/audio-engine"
 import { Terminal, X, CornerDownLeft } from "lucide-react"
 
 interface HistoryEntry {
@@ -22,20 +22,29 @@ export default function TerminalDrawer() {
   const inputRef = useRef<HTMLInputElement>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
 
-  // Listen for `~` or Escape key
+  // Listen for `~`, Escape key, or custom event
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "~" || e.key === "`") {
         e.preventDefault()
         setIsOpen((prev) => !prev)
-        soundFx.playClickSnap()
+        playSound("snap")
       } else if (e.key === "Escape" && isOpen) {
         setIsOpen(false)
       }
     }
 
+    const handleOpenCustom = () => {
+      setIsOpen(true)
+      playSound("snap")
+    }
+
     window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
+    window.addEventListener("open-cli-drawer", handleOpenCustom)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+      window.removeEventListener("open-cli-drawer", handleOpenCustom)
+    }
   }, [isOpen])
 
   useEffect(() => {
@@ -53,13 +62,13 @@ export default function TerminalDrawer() {
     const cmd = input.trim().toLowerCase()
     if (!cmd) return
 
-    soundFx.playClickSnap()
+    playSound("snap")
     let output: string | React.ReactNode = ""
 
     switch (cmd) {
       case "help":
         output = (
-          <div className="space-y-1 text-xs font-mono text-muted-foreground">
+          <div className="space-y-1 text-xs font-mono text-zinc-400">
             <p><span className="text-emerald-400">help</span> - List available commands</p>
             <p><span className="text-emerald-400">skills</span> - Display categorized engineering stack</p>
             <p><span className="text-emerald-400">projects</span> - View production web platforms</p>
@@ -73,18 +82,18 @@ export default function TerminalDrawer() {
 
       case "skills":
         output = (
-          <div className="space-y-1 text-xs font-mono">
-            <p className="text-foreground font-semibold">Core UI & Architecture:</p>
-            <p className="text-muted-foreground">React 19, Next.js 16 (App Router), TypeScript, Tailwind CSS v4</p>
-            <p className="text-foreground font-semibold pt-1">State & Systems:</p>
-            <p className="text-muted-foreground">Redux Toolkit, RTK Query, TanStack Query, Firebase RTDB, MongoDB</p>
+          <div className="space-y-1 text-xs font-mono text-zinc-300">
+            <p className="text-white font-semibold">Core UI & Architecture:</p>
+            <p className="text-zinc-400">React 19, Next.js 16 (App Router), TypeScript, Tailwind CSS v4</p>
+            <p className="text-white font-semibold pt-1">State & Systems:</p>
+            <p className="text-zinc-400">Redux Toolkit, RTK Query, TanStack Query, Firebase RTDB, MongoDB</p>
           </div>
         )
         break
 
       case "projects":
         output = (
-          <div className="space-y-1 text-xs font-mono">
+          <div className="space-y-1 text-xs font-mono text-zinc-300">
             <p><span className="text-emerald-400">1. VNB Diaper Storefront:</span> https://vnbdiaper.vercel.app</p>
             <p><span className="text-emerald-400">2. MufarTech Website:</span> https://mufartech-website.vercel.app</p>
             <p><span className="text-emerald-400">3. Mufar Tech Tasks:</span> https://mufar-tech-tasks.vercel.app</p>
@@ -105,7 +114,7 @@ export default function TerminalDrawer() {
         break
 
       case "resume":
-        soundFx.playSuccessTone()
+        playSound("chord")
         window.open("/resume.pdf", "_blank")
         output = "Opening resume download..."
         break
@@ -132,17 +141,17 @@ export default function TerminalDrawer() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 p-4 max-w-4xl mx-auto animate-in slide-in-from-bottom duration-300">
-      <div className="rounded-xl border border-border bg-card/95 backdrop-blur-2xl shadow-2xl overflow-hidden font-mono text-xs">
+      <div className="rounded-2xl border border-white/10 bg-zinc-950/95 backdrop-blur-2xl shadow-2xl overflow-hidden font-mono text-xs">
         {/* Terminal Title Bar */}
-        <div className="flex items-center justify-between px-4 py-2.5 bg-secondary/40 border-b border-border">
-          <div className="flex items-center gap-2 text-muted-foreground">
+        <div className="flex items-center justify-between px-4 py-2.5 bg-black/60 border-b border-white/10">
+          <div className="flex items-center gap-2 text-zinc-400">
             <Terminal className="w-4 h-4 text-emerald-400" />
-            <span className="font-semibold text-foreground">masood@developer-shell:~</span>
+            <span className="font-semibold text-white">masood@developer-shell:~</span>
           </div>
 
           <button
             onClick={() => setIsOpen(false)}
-            className="p-1 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+            className="p-1 rounded hover:bg-white/10 text-zinc-400 hover:text-white transition-colors cursor-pointer"
             aria-label="Close terminal"
           >
             <X className="w-4 h-4" />
@@ -155,16 +164,16 @@ export default function TerminalDrawer() {
             <div key={index} className="space-y-1">
               <div className="flex items-center gap-2 text-emerald-400">
                 <span>➜</span>
-                <span className="text-foreground font-medium">{item.command}</span>
+                <span className="text-white font-medium">{item.command}</span>
               </div>
-              <div className="pl-4 text-muted-foreground leading-relaxed">{item.output}</div>
+              <div className="pl-4 text-zinc-400 leading-relaxed">{item.output}</div>
             </div>
           ))}
           <div ref={bottomRef} />
         </div>
 
         {/* Input Bar */}
-        <form onSubmit={handleCommand} className="flex items-center gap-2 px-4 py-2.5 border-t border-border bg-background/50">
+        <form onSubmit={handleCommand} className="flex items-center gap-2 px-4 py-2.5 border-t border-white/10 bg-black/50">
           <span className="text-emerald-400 font-bold">➜</span>
           <input
             ref={inputRef}
@@ -172,9 +181,9 @@ export default function TerminalDrawer() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type 'help'..."
-            className="flex-1 bg-transparent text-foreground placeholder:text-muted-foreground/40 focus:outline-none text-xs font-mono"
+            className="flex-1 bg-transparent text-white placeholder:text-zinc-600 focus:outline-none text-xs font-mono"
           />
-          <button type="submit" className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+          <button type="submit" className="text-zinc-400 hover:text-white transition-colors cursor-pointer">
             <CornerDownLeft className="w-3.5 h-3.5" />
           </button>
         </form>

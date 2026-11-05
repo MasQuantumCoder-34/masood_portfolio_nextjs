@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useEffect, useState } from "react"
-import { soundFx } from "@/components/sound/audio-engine"
+import { playSound } from "@/components/sound/audio-engine"
 
 const PHILOSOPHY_TEXT = "A tool is only as powerful as the person who understands it."
 

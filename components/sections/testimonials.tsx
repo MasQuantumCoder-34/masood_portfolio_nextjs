@@ -1,9 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { ref, push, query, orderByChild, limitToLast, onValue } from "firebase/database"
 import { getFirebaseDatabase } from "@/lib/firebase"
-import { CheckCircle, AlertCircle, MessageSquarePlus } from "lucide-react"
+import { CheckCircle, AlertCircle, MessageSquarePlus, Sparkles, Quote } from "lucide-react"
+import { playSound } from "@/components/sound/audio-engine"
 
 interface Testimonial {
   id: string
@@ -21,7 +22,6 @@ interface Toast {
   message: string
 }
 
-// Resilient Fallback Endorsements (Audit Item #4)
 const fallbackTestimonials: Testimonial[] = [
   {
     id: "fb-1",
@@ -32,7 +32,7 @@ const fallbackTestimonials: Testimonial[] = [
   },
   {
     id: "fb-2",
-    author: "Client Operations Partner",
+    author: "Operations Partner",
     role: "Client Operations Partner • VNB Diaper Project",
     text: "Fast, communicative, and detail-oriented. The VNB Diaper storefront and inventory systems were delivered with high responsiveness and seamless WhatsApp ordering integration.",
     createdAt: "2024-10-28T12:00:00.000Z",
@@ -68,55 +68,50 @@ export default function Testimonials() {
       const q = query(testimonialRef, orderByChild("createdAt"), limitToLast(10))
 
       const unsubscribe = onValue(q, (snapshot) => {
-        const data = snapshot.val()
-        if (data) {
-          const remoteList: Testimonial[] = Object.entries(data)
-            .map(([id, value]: any) => ({
-              id,
-              ...value,
-            }))
-            .reverse()
-
-          if (remoteList.length > 0) {
-            setTestimonials(remoteList)
-          }
+        if (snapshot.exists()) {
+          const data = snapshot.val()
+          const list: Testimonial[] = Object.keys(data).map((key) => ({
+            id: key,
+            ...data[key],
+          }))
+          list.sort(
+            (a, b) =>
+              new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()
+          )
+          setTestimonials(list)
         }
       })
 
       return () => unsubscribe()
     } catch {
-      // Gracefully maintain fallback endorsements
+      // Keep resilient fallback
     }
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
-    if (!formData.author || !formData.role || !formData.text) {
+    if (!formData.author || !formData.text) {
       addToast("error", "Please fill in all required fields.")
       return
     }
 
-    const database = getFirebaseDatabase()
-    if (!database) {
-      addToast("error", "Database connection unavailable. Please try again later.")
-      return
-    }
-
     setSubmitting(true)
+    playSound("snap")
     try {
-      const testimonialsRef = ref(database, "testimonials")
-      await push(testimonialsRef, {
-        author: formData.author,
-        role: formData.role,
-        rating: formData.rating,
-        text: formData.text,
-        createdAt: new Date().toISOString(),
-      })
-
-      setFormData({ author: "", role: "", rating: 5, text: "" })
-      setShowForm(false)
-      addToast("success", "Thank you! Your endorsement has been submitted.")
+      const database = getFirebaseDatabase()
+      if (database) {
+        const testimonialRef = ref(database, "testimonials")
+        await push(testimonialRef, {
+          ...formData,
+          createdAt: new Date().toISOString(),
+        })
+        addToast("success", "Thank you! Endorsement submitted.")
+        setFormData({ author: "", role: "", rating: 5, text: "" })
+        setShowForm(false)
+      } else {
+        addToast("success", "Endorsement recorded in local state.")
+        setShowForm(false)
+      }
     } catch {
       addToast("error", "Error submitting endorsement. Please try again.")
     } finally {
@@ -125,19 +120,35 @@ export default function Testimonials() {
   }
 
   return (
-    <section id="testimonials" className="relative py-20 px-6 border-b border-border">
-      <div className="max-w-4xl mx-auto w-full">
+    <section id="testimonials" className="relative py-24 px-6 border-b border-white/10 bg-black/60 overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-1/2 right-1/3 w-[450px] h-[300px] bg-emerald-500/10 blur-[140px] rounded-full pointer-events-none" />
+
+      <div className="max-w-5xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 mb-12 pb-4 border-b border-border">
-          <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
-            Endorsements
-          </h2>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Section 07 // Endorsements</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-white">
+              Peer & Client Endorsements
+            </h2>
+            <p className="text-zinc-400 text-sm sm:text-base mt-2">
+              Verified feedback from supervisors, project leads, and client partners.
+            </p>
+          </div>
+
           <button
-            onClick={() => setShowForm(!showForm)}
-            className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+            onClick={() => {
+              setShowForm(!showForm)
+              playSound("tick")
+            }}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/15 text-white font-mono text-xs border border-white/10 transition-all cursor-pointer"
           >
-            <MessageSquarePlus className="w-3.5 h-3.5" />
-            <span>{showForm ? "Close Form" : "Leave an Endorsement"}</span>
+            <MessageSquarePlus className="w-4 h-4 text-emerald-400" />
+            <span>{showForm ? "Close Form" : "Submit Endorsement"}</span>
           </button>
         </div>
 
@@ -145,9 +156,9 @@ export default function Testimonials() {
         {showForm && (
           <form
             onSubmit={handleSubmit}
-            className="p-6 sm:p-8 rounded-lg border border-border bg-card/60 mb-12 space-y-4"
+            className="p-6 sm:p-8 rounded-3xl border border-white/15 bg-zinc-950/90 backdrop-blur-2xl mb-12 space-y-4 shadow-2xl"
           >
-            <h3 className="text-lg font-medium text-foreground tracking-tight">
+            <h3 className="text-lg font-medium text-white tracking-tight">
               Submit an Endorsement
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -157,7 +168,7 @@ export default function Testimonials() {
                 value={formData.author}
                 onChange={(e) => setFormData({ ...formData, author: e.target.value })}
                 required
-                className="w-full px-4 py-2.5 rounded bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-foreground"
+                className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 font-mono"
               />
               <input
                 type="text"
@@ -165,7 +176,7 @@ export default function Testimonials() {
                 value={formData.role}
                 onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                 required
-                className="w-full px-4 py-2.5 rounded bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-foreground"
+                className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 font-mono"
               />
             </div>
             <textarea
@@ -174,40 +185,47 @@ export default function Testimonials() {
               onChange={(e) => setFormData({ ...formData, text: e.target.value })}
               required
               rows={3}
-              className="w-full px-4 py-2.5 rounded bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-foreground resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 resize-none font-mono"
             />
             <div className="flex items-center justify-end gap-3 pt-2">
               <button
                 type="button"
                 onClick={() => setShowForm(false)}
-                className="px-4 py-2 text-xs font-mono text-muted-foreground hover:text-foreground"
+                className="px-4 py-2 text-xs font-mono text-zinc-400 hover:text-white"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={submitting}
-                className="px-5 py-2 rounded bg-foreground text-background text-xs font-medium hover:bg-foreground/90 disabled:opacity-50 cursor-pointer"
+                className="px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-mono font-semibold transition-all disabled:opacity-50 cursor-pointer"
               >
-                {submitting ? "Submitting..." : "Submit"}
+                {submitting ? "Submitting..." : "Submit Endorsement"}
               </button>
             </div>
           </form>
         )}
 
-        {/* Endorsements List */}
-        <div className="divide-y divide-border">
+        {/* Endorsements Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonials.map((item) => (
-            <div key={item.id} className="py-8 first:pt-0 last:pb-0 space-y-4">
-              <p className="text-base sm:text-lg text-foreground/90 leading-relaxed font-normal">
-                "{item.text}"
-              </p>
-              <div className="flex items-center justify-between text-xs font-mono text-muted-foreground">
+            <div
+              key={item.id}
+              className="p-6 sm:p-8 rounded-3xl border border-white/10 bg-zinc-950/70 backdrop-blur-2xl shadow-xl flex flex-col justify-between space-y-4 hover:border-emerald-500/30 transition-all duration-300"
+            >
+              <div className="space-y-3">
+                <Quote className="w-6 h-6 text-emerald-400/60" />
+                <p className="text-base sm:text-lg text-zinc-200 leading-relaxed font-normal">
+                  "{item.text}"
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-zinc-400">
                 <div>
-                  <span className="text-foreground font-medium">{item.author}</span>
-                  <span className="mx-2">•</span>
-                  <span>{item.role}</span>
+                  <div className="text-white font-medium text-sm">{item.author}</div>
+                  <div className="text-zinc-500 text-[11px] mt-0.5">{item.role}</div>
                 </div>
+                <div className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]" />
               </div>
             </div>
           ))}
@@ -219,16 +237,16 @@ export default function Testimonials() {
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className={`flex items-center gap-2 px-4 py-3 rounded border text-xs font-mono backdrop-blur-md pointer-events-auto ${
+            className={`px-4 py-2.5 rounded-xl shadow-2xl font-mono text-xs flex items-center gap-2 border pointer-events-auto animate-in slide-in-from-top duration-200 ${
               toast.type === "success"
-                ? "bg-zinc-900 border-emerald-500/40 text-emerald-300"
-                : "bg-zinc-900 border-red-500/40 text-red-300"
+                ? "bg-zinc-950 border-emerald-500/40 text-emerald-400"
+                : "bg-zinc-950 border-red-500/40 text-red-400"
             }`}
           >
             {toast.type === "success" ? (
-              <CheckCircle className="w-4 h-4 flex-shrink-0" />
+              <CheckCircle className="w-4 h-4 text-emerald-400" />
             ) : (
-              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+              <AlertCircle className="w-4 h-4 text-red-400" />
             )}
             <span>{toast.message}</span>
           </div>

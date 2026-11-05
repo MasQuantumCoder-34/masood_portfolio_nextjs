@@ -76,7 +76,7 @@ class SoundDesigner {
     }
   }
 
-  // 3. Melodic harmonic triad chord for success actions / terminal commands
+  // 3. Melodic harmonic triad chord for success actions
   public playSuccessTone() {
     if (this.isMuted) return
     this.initContext()
@@ -107,3 +107,20 @@ class SoundDesigner {
 }
 
 export const soundFx = typeof window !== "undefined" ? new SoundDesigner() : ({} as SoundDesigner)
+
+export function playSound(type: "tick" | "snap" | "chord") {
+  if (typeof window === "undefined" || !soundFx.playHoverTick) return
+  if (type === "tick") soundFx.playHoverTick()
+  else if (type === "snap") soundFx.playClickSnap()
+  else if (type === "chord") soundFx.playSuccessTone()
+}
+
+export function toggleAudioMute(): boolean {
+  if (typeof window === "undefined" || !soundFx.toggleMute) return true
+  return soundFx.toggleMute()
+}
+
+export function isAudioMuted(): boolean {
+  if (typeof window === "undefined") return true
+  return soundFx.isMuted ?? true
+}
