@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
+import ClientProviders from "@/components/providers/client-providers"
 // @ts-ignore: CSS module declarations not present in this environment
 import "./globals.css"
 
@@ -32,17 +33,17 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Mohammed Azhar | Front-End Developer",
+    title: "Mohammed Masood Azhar V | Front-End Developer",
     description:
       "Front-End Engineer specializing in React, TypeScript, and Next.js. Building responsive, accessible web interfaces.",
     url: baseUrl,
-    siteName: "Mohammed Azhar Portfolio",
+    siteName: "Mohammed Masood Azhar Portfolio",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mohammed Azhar | Front-End Developer",
+    title: "Mohammed Masood Azhar V | Front-End Developer",
     description:
       "Front-End Engineer specializing in React, TypeScript, and Next.js.",
   },
@@ -60,9 +61,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          {children}
+          <ClientProviders>
+            {children}
+          </ClientProviders>
         </ThemeProvider>
         <Analytics />
       </body>
