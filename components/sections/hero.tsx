@@ -8,7 +8,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-[82vh] flex flex-col justify-center px-6 pt-32 pb-16">
+    <section className="relative px-6 pt-32 sm:pt-36 pb-12 border-b border-border">
       <div className="max-w-4xl mx-auto w-full">
         {/* Editorial Eyebrow */}
         <div className="mb-6">
@@ -25,7 +25,7 @@ export default function Hero() {
         </h1>
 
         {/* Outcome Subhead */}
-        <p className="text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed mb-12">
+        <p className="text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed mb-10">
           Front-End Engineer with enterprise experience at{" "}
           <span className="text-foreground font-medium">DataTerrain</span> (cutting client API redundancy by 30% with RTK Query) and 
           freelance storefront delivery for <span className="text-foreground font-medium">VNB Diapers</span>. Currently working at{" "}
@@ -33,7 +33,7 @@ export default function Hero() {
         </p>
 
         {/* Action Row */}
-        <div className="flex items-center gap-8 mb-16">
+        <div className="flex items-center gap-8 mb-12">
           <button
             onClick={scrollToProjects}
             className="inline-flex items-center gap-2 text-foreground font-medium text-sm sm:text-base hover:text-muted-foreground transition-colors group cursor-pointer"
@@ -55,7 +55,7 @@ export default function Hero() {
         </div>
 
         {/* Hairline Divider & Stack Line */}
-        <div className="pt-8 border-t border-border">
+        <div className="pt-6 border-t border-border">
           <p className="font-mono text-xs sm:text-sm text-muted-foreground/80 tracking-wide">
             React · Next.js · TypeScript · Redux Toolkit · RTK Query · Tailwind CSS · Firebase
           </p>

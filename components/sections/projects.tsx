@@ -91,10 +91,10 @@ export default function Projects() {
   ]
 
   return (
-    <section id="projects" className="relative py-28 px-6 border-b border-border">
+    <section id="projects" className="relative pt-14 pb-20 px-6 border-b border-border">
       <div className="max-w-4xl mx-auto w-full">
         {/* Editorial Section Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 mb-16 pb-4 border-b border-border">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 mb-12 pb-4 border-b border-border">
           <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
             Selected work
           </h2>
@@ -118,7 +118,7 @@ export default function Projects() {
                       {project.title}
                     </h3>
                     {project.confidential && (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono bg-zinc-800 text-zinc-400 border border-border">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono bg-muted text-muted-foreground border border-border">
                         <Lock className="w-3 h-3" />
                         Confidential
                       </span>

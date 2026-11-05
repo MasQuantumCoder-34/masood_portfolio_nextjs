@@ -64,10 +64,10 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="relative py-28 px-6">
+    <section id="contact" className="relative py-20 px-6">
       <div className="max-w-4xl mx-auto w-full">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 mb-16 pb-4 border-b border-border">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 mb-12 pb-4 border-b border-border">
           <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
             Contact
           </h2>
