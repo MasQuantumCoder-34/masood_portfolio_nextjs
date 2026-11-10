@@ -104,13 +104,13 @@ export default function Projects() {
     filter === "all" ? projects : projects.filter((p) => p.filterType === filter)
 
   return (
-    <section id="projects" className="relative py-28 px-6 border-b border-white/10 bg-black/70 overflow-hidden">
+    <section id="projects" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/10 bg-black/70 overflow-hidden">
       {/* Ambient background volumetric glow */}
       <div className="absolute top-1/2 left-1/3 w-[550px] h-[350px] bg-emerald-500/10 blur-[150px] rounded-full pointer-events-none" />
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 sm:gap-6 mb-6 sm:mb-8">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
               <Sparkles className="w-3.5 h-3.5" />
@@ -169,7 +169,7 @@ export default function Projects() {
         </div>
 
         {/* High-Impact Fiverr Bug-Fixing & API Integration Callout Banner */}
-        <div className="mb-12 p-6 sm:p-8 rounded-3xl border border-emerald-500/30 bg-gradient-to-r from-emerald-950/40 via-zinc-950/80 to-cyan-950/40 backdrop-blur-2xl shadow-2xl relative overflow-hidden group">
+        <div className="mb-6 sm:mb-8 p-5 sm:p-7 rounded-3xl border border-emerald-500/30 bg-gradient-to-r from-emerald-950/40 via-zinc-950/80 to-cyan-950/40 backdrop-blur-2xl shadow-2xl relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 blur-3xl rounded-full pointer-events-none" />
           
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
@@ -211,7 +211,7 @@ export default function Projects() {
         </div>
 
         {/* 3D Perspective Tilt Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-8">
           {filteredProjects.map((project) => (
             <TiltCard key={project.id} {...project} />
           ))}

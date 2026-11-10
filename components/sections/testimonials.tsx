@@ -120,13 +120,13 @@ export default function Testimonials() {
   }
 
   return (
-    <section id="testimonials" className="relative py-24 px-6 border-b border-white/10 bg-black/60 overflow-hidden">
+    <section id="testimonials" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/10 bg-black/60 overflow-hidden">
       {/* Ambient glow */}
       <div className="absolute top-1/2 right-1/3 w-[450px] h-[300px] bg-emerald-500/10 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="max-w-5xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-6 mb-6 sm:mb-8">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
               <Sparkles className="w-3.5 h-3.5" />
@@ -156,7 +156,7 @@ export default function Testimonials() {
         {showForm && (
           <form
             onSubmit={handleSubmit}
-            className="p-6 sm:p-8 rounded-3xl border border-white/15 bg-zinc-950/90 backdrop-blur-2xl mb-12 space-y-4 shadow-2xl"
+            className="p-5 sm:p-7 rounded-3xl border border-white/15 bg-zinc-950/90 backdrop-blur-2xl mb-6 sm:mb-8 space-y-4 shadow-2xl"
           >
             <h3 className="text-lg font-medium text-white tracking-tight">
               Submit an Endorsement
@@ -207,11 +207,11 @@ export default function Testimonials() {
         )}
 
         {/* Endorsements Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="p-6 sm:p-8 rounded-3xl border border-white/10 bg-zinc-950/70 backdrop-blur-2xl shadow-xl flex flex-col justify-between space-y-4 hover:border-emerald-500/30 transition-all duration-300"
+              className="p-5 sm:p-7 rounded-3xl border border-white/10 bg-zinc-950/70 backdrop-blur-2xl shadow-xl flex flex-col justify-between space-y-4 hover:border-emerald-500/30 transition-all duration-300"
             >
               <div className="space-y-3">
                 <Quote className="w-6 h-6 text-emerald-400/60" />

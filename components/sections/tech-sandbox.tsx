@@ -407,13 +407,13 @@ export default function TechSandbox() {
   }
 
   return (
-    <section id="sandbox" className="relative py-24 px-6 border-b border-white/10 overflow-hidden bg-black/40">
+    <section id="sandbox" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/10 overflow-hidden bg-black/40">
       {/* Ambient background volumetric glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-emerald-500/10 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 sm:gap-6 mb-6 sm:mb-8">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
               <Sparkles className="w-3.5 h-3.5" />
@@ -483,7 +483,7 @@ export default function TechSandbox() {
         {/* Sandbox Canvas Container */}
         <div
           ref={containerRef}
-          className="relative w-full h-[520px] rounded-3xl border border-white/10 bg-zinc-950/70 backdrop-blur-2xl shadow-2xl overflow-hidden group touch-pan-y"
+          className="relative w-full h-[380px] sm:h-[460px] lg:h-[520px] rounded-3xl border border-white/10 bg-zinc-950/70 backdrop-blur-2xl shadow-2xl overflow-hidden group touch-pan-y"
         >
           {/* Canvas with Universal Pointer Events */}
           <canvas

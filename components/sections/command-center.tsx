@@ -231,13 +231,13 @@ export default function CommandCenter() {
   }
 
   return (
-    <footer id="connect" className="relative py-28 px-6 border-t border-white/10 bg-black overflow-hidden">
+    <footer id="connect" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-t border-white/10 bg-black overflow-hidden">
       {/* Ambient background volumetric glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-emerald-500/10 blur-[160px] rounded-full pointer-events-none" />
 
       <div className="max-w-5xl mx-auto w-full relative z-10 flex flex-col items-center text-center">
         {/* Availability Badge */}
-        <div className="inline-flex flex-wrap items-center justify-center gap-3 px-4 py-2 rounded-full bg-zinc-900/80 border border-white/10 text-xs font-mono text-zinc-400 shadow-2xl mb-8 backdrop-blur-xl">
+        <div className="inline-flex flex-wrap items-center justify-center gap-3 px-4 py-2 rounded-full bg-zinc-900/80 border border-white/10 text-xs font-mono text-zinc-400 shadow-2xl mb-5 sm:mb-6 backdrop-blur-xl">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
@@ -252,28 +252,28 @@ export default function CommandCenter() {
         </div>
 
         {/* 3D Wireframe Telemetry Globe */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <WireframeGlobe />
         </div>
 
         {/* Global Connection Callout */}
-        <div className="space-y-4 max-w-2xl mx-auto mb-10">
+        <div className="space-y-3 sm:space-y-4 max-w-2xl mx-auto mb-6 sm:mb-8">
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
             Ready to engineer something extraordinary?
           </h2>
-          <p className="text-base text-zinc-400 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base text-zinc-400 leading-relaxed font-normal">
             Open to front-end & mobile engineering roles, Flutter & React bug fixing, API integrations, and contract architectures. Click below to copy email or order on Fiverr.
           </p>
         </div>
 
         {/* Magnetic Action Controls */}
-        <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12">
           <a
             href="https://www.fiverr.com/s/8xyp7XZ"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => playSound("chord")}
-            className="inline-flex items-center gap-2 px-6 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-mono text-xs sm:text-sm uppercase tracking-wider font-bold transition-all shadow-xl shadow-emerald-500/25 active:scale-95 cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-mono text-xs sm:text-sm uppercase tracking-wider font-bold transition-all shadow-xl shadow-emerald-500/25 active:scale-95 cursor-pointer"
           >
             <Sparkles className="w-4 h-4" />
             <span>Order on Fiverr ↗</span>
@@ -281,7 +281,7 @@ export default function CommandCenter() {
 
           <button
             onClick={copyEmail}
-            className="inline-flex items-center gap-2.5 px-7 py-4 rounded-2xl bg-white hover:bg-zinc-200 text-black font-mono text-sm font-semibold shadow-2xl shadow-white/10 transition-all cursor-pointer active:scale-95"
+            className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-white hover:bg-zinc-200 text-black font-mono text-xs sm:text-sm font-semibold shadow-2xl shadow-white/10 transition-all cursor-pointer active:scale-95"
           >
             {copied ? (
               <>
@@ -299,7 +299,7 @@ export default function CommandCenter() {
           <a
             href={`mailto:${email}`}
             onClick={() => playSound("snap")}
-            className="inline-flex items-center gap-2 px-6 py-4 rounded-2xl bg-white/5 hover:bg-white/15 text-white font-mono text-xs uppercase tracking-wider font-semibold border border-white/10 transition-all backdrop-blur-xl cursor-pointer active:scale-95"
+            className="inline-flex items-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 rounded-2xl bg-white/5 hover:bg-white/15 text-white font-mono text-xs uppercase tracking-wider font-semibold border border-white/10 transition-all backdrop-blur-xl cursor-pointer active:scale-95"
           >
             <Mail className="w-4 h-4 text-emerald-400" />
             <span>Send Email Direct ↗</span>
@@ -307,7 +307,7 @@ export default function CommandCenter() {
 
           <button
             onClick={openTerminal}
-            className="inline-flex items-center gap-2 px-5 py-4 rounded-2xl bg-white/5 hover:bg-white/15 text-zinc-400 hover:text-white font-mono text-xs border border-white/10 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 sm:px-5 py-3.5 sm:py-4 rounded-2xl bg-white/5 hover:bg-white/15 text-zinc-400 hover:text-white font-mono text-xs border border-white/10 transition-colors cursor-pointer"
             title="Press ~ key to toggle terminal"
           >
             <Terminal className="w-4 h-4 text-emerald-400" />
@@ -316,7 +316,7 @@ export default function CommandCenter() {
         </div>
 
         {/* Sub-footer Brand Note */}
-        <div className="w-full pt-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-zinc-500 gap-4">
+        <div className="w-full pt-6 sm:pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-zinc-500 gap-4">
           <div>
             © {new Date().getFullYear()} Mohammed Masood Azhar V. High-Performance Portfolio.
           </div>

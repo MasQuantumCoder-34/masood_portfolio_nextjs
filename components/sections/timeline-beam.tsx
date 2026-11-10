@@ -113,13 +113,13 @@ export default function TimelineBeam() {
   }, [])
 
   return (
-    <section id="timeline" ref={containerRef} className="relative py-28 px-6 border-b border-white/10 bg-black/80 overflow-hidden">
+    <section id="timeline" ref={containerRef} className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/10 bg-black/80 overflow-hidden">
       {/* Ambient background volumetric glow */}
       <div className="absolute top-1/2 right-1/4 w-[450px] h-[450px] bg-purple-500/10 blur-[150px] rounded-full pointer-events-none" />
 
       <div className="max-w-5xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="mb-16 text-center max-w-2xl mx-auto">
+        <div className="mb-8 sm:mb-12 text-center max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Section 06 // The Lightbeam Path</span>
@@ -150,7 +150,7 @@ export default function TimelineBeam() {
           </div>
 
           {/* Milestone Cards */}
-          <div className="space-y-12">
+          <div className="space-y-6 sm:space-y-8 lg:space-y-10">
             {milestones.map((item, idx) => {
               const cardThreshold = (idx + 0.5) / milestones.length
               const isPassed = scrollProgress >= cardThreshold
@@ -174,7 +174,7 @@ export default function TimelineBeam() {
 
                   {/* Card Body */}
                   <div
-                    className={`p-6 sm:p-8 rounded-3xl border transition-all duration-500 backdrop-blur-2xl shadow-xl ${
+                    className={`p-5 sm:p-7 rounded-3xl border transition-all duration-500 backdrop-blur-2xl shadow-xl ${
                       isPassed
                         ? "bg-zinc-950/80 border-white/15 hover:border-emerald-500/40 shadow-emerald-500/5 translate-x-1"
                         : "bg-zinc-950/40 border-white/5 opacity-80"

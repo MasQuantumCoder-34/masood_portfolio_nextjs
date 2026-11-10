@@ -66,11 +66,11 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact-form" className="relative py-24 px-6 border-b border-white/10 bg-black/80 overflow-hidden">
+    <section id="contact-form" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/10 bg-black/80 overflow-hidden">
       <div className="max-w-5xl mx-auto w-full relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 lg:gap-12">
           {/* Left Column: Direct Inquiries */}
-          <div className="md:col-span-5 space-y-6">
+          <div className="md:col-span-5 space-y-4 sm:space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-2">
               <span>Direct Comms</span>
             </div>
@@ -81,7 +81,7 @@ export default function Contact() {
               Available for front-end engineering roles, design system consulting, and enterprise web applications. Submit a transmission or connect directly.
             </p>
 
-            <div className="space-y-3 pt-6 border-t border-white/10">
+            <div className="space-y-2.5 sm:space-y-3 pt-4 sm:pt-6 border-t border-white/10">
               {directChannels.map((item) => (
                 <div key={item.label} className="flex justify-between items-center text-xs font-mono p-3 rounded-xl bg-zinc-900/60 border border-white/5">
                   <span className="text-zinc-500 uppercase">{item.label}</span>
@@ -104,7 +104,7 @@ export default function Contact() {
           <div className="md:col-span-7">
             <form
               onSubmit={handleSubmit}
-              className="p-6 sm:p-8 rounded-3xl border border-white/10 bg-zinc-950/80 backdrop-blur-2xl shadow-2xl space-y-4"
+              className="p-5 sm:p-7 rounded-3xl border border-white/10 bg-zinc-950/80 backdrop-blur-2xl shadow-2xl space-y-4"
             >
               <h3 className="text-lg font-semibold text-white tracking-tight mb-2">
                 Send Direct Message

@@ -246,7 +246,7 @@ export default function HeroCanvas() {
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
-      className="relative w-full h-[320px] sm:h-[420px] lg:h-[520px] rounded-3xl border border-white/10 bg-zinc-950/60 backdrop-blur-2xl shadow-2xl overflow-hidden group cursor-grab active:cursor-grabbing select-none touch-none"
+      className="relative w-full h-[260px] sm:h-[360px] lg:h-[480px] rounded-3xl border border-white/10 bg-zinc-950/60 backdrop-blur-2xl shadow-2xl overflow-hidden group cursor-grab active:cursor-grabbing select-none touch-none"
     >
       {/* 3D WebGL Canvas */}
       <Canvas

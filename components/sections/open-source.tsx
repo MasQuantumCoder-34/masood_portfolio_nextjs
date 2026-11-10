@@ -33,10 +33,10 @@ const repos = [
 
 export default function OpenSource() {
   return (
-    <section className="relative py-24 px-6 border-b border-white/10 bg-black/70 overflow-hidden">
+    <section className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/10 bg-black/70 overflow-hidden">
       <div className="max-w-5xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-6 mb-6 sm:mb-8">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono text-xs uppercase tracking-widest mb-3">
               <Sparkles className="w-3.5 h-3.5" />
@@ -63,7 +63,7 @@ export default function OpenSource() {
         </div>
 
         {/* Repositories Cards Grid */}
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {repos.map((repo, i) => (
             <a
               key={i}
@@ -72,7 +72,7 @@ export default function OpenSource() {
               rel="noopener noreferrer"
               onMouseEnter={() => playSound("tick")}
               onClick={() => playSound("snap")}
-              className="p-6 rounded-2xl border border-white/10 bg-zinc-950/70 backdrop-blur-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-emerald-500/30 transition-all duration-300 group cursor-pointer"
+              className="p-4 sm:p-5 rounded-2xl border border-white/10 bg-zinc-950/70 backdrop-blur-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-emerald-500/30 transition-all duration-300 group cursor-pointer"
             >
               <div className="space-y-1.5 max-w-xl">
                 <div className="flex items-center gap-2">

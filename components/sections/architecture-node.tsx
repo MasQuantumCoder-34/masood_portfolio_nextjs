@@ -123,13 +123,13 @@ export default function ArchitectureNode() {
   }, [])
 
   return (
-    <section id="architecture" className="relative py-24 px-6 border-b border-white/10 bg-black/60 overflow-hidden">
+    <section id="architecture" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/10 bg-black/60 overflow-hidden">
       {/* Ambient background volumetric glow */}
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[300px] bg-cyan-500/10 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 sm:gap-6 mb-6 sm:mb-8">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono text-xs uppercase tracking-widest mb-3">
               <Activity className="w-3.5 h-3.5" />
@@ -167,7 +167,7 @@ export default function ArchitectureNode() {
         </div>
 
         {/* Node Pipeline Visualizer */}
-        <div className="relative p-6 sm:p-10 rounded-3xl border border-white/10 bg-zinc-950/80 backdrop-blur-2xl shadow-2xl mb-8 overflow-hidden">
+        <div className="relative p-4 sm:p-8 rounded-3xl border border-white/10 bg-zinc-950/80 backdrop-blur-2xl shadow-2xl mb-6 overflow-hidden">
           {/* Neon energy beam connecting nodes in desktop */}
           <div className="hidden lg:block absolute top-[86px] left-[10%] right-[10%] h-[2px] bg-white/10 z-0">
             {/* Animated Packet */}
@@ -181,7 +181,7 @@ export default function ArchitectureNode() {
             )}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 relative z-10">
             {steps.map((step, idx) => {
               const Icon = step.icon
               const isCurrent = activeStep === idx
@@ -248,7 +248,7 @@ export default function ArchitectureNode() {
         </div>
 
         {/* Telemetry Console Output */}
-        <div className="rounded-2xl border border-white/10 bg-black/90 p-5 font-mono text-xs shadow-xl">
+        <div className="rounded-2xl border border-white/10 bg-black/90 p-4 sm:p-5 font-mono text-xs shadow-xl">
           <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10 text-zinc-400">
             <div className="flex items-center gap-2">
               <Terminal className="w-4 h-4 text-emerald-400" />

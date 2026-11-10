@@ -72,7 +72,7 @@ export default function TiltCard({
         transition: "transform 0.15s ease-out",
         transformStyle: "preserve-3d",
       }}
-      className="group relative rounded-3xl border border-white/10 bg-zinc-950/70 backdrop-blur-2xl p-6 sm:p-8 overflow-hidden shadow-2xl hover:border-emerald-500/40 transition-all duration-300"
+      className="group relative rounded-3xl border border-white/10 bg-zinc-950/70 backdrop-blur-2xl p-5 sm:p-7 lg:p-8 overflow-hidden shadow-2xl hover:border-emerald-500/40 transition-all duration-300"
     >
       {/* Cursor-Aware Specular Spotlight */}
       <div
@@ -82,7 +82,7 @@ export default function TiltCard({
         }}
       />
 
-      <div className="relative z-20 flex flex-col justify-between h-full space-y-6">
+      <div className="relative z-20 flex flex-col justify-between h-full space-y-4 sm:space-y-6">
         {/* Top Header: ID & Live Metric Badge */}
         <div className="flex items-center justify-between">
           <span className="font-mono text-xs text-zinc-500 uppercase tracking-widest">{id} // SPEC</span>
@@ -127,9 +127,9 @@ export default function TiltCard({
         )}
 
         {/* Narrative & Engineering Impact */}
-        <div className="space-y-3">
+        <div className="space-y-2.5 sm:space-y-3">
           <p className="text-xs font-mono uppercase tracking-wider text-emerald-400/90">{category}</p>
-          <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
+          <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
             {title}
           </h3>
           <div className="space-y-2 text-sm text-zinc-300 leading-relaxed">
