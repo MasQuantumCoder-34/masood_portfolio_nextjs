@@ -9,7 +9,7 @@ import { playSound } from "@/components/sound/audio-engine"
 const HeroCanvas = dynamic(() => import("@/components/3d/hero-prism"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[400px] sm:h-[480px] lg:h-[540px] rounded-3xl border border-white/10 bg-zinc-950/40 flex items-center justify-center">
+    <div className="w-full h-[320px] sm:h-[420px] lg:h-[520px] rounded-3xl border border-white/10 bg-zinc-950/40 flex items-center justify-center">
       <div className="w-48 h-48 rounded-full bg-emerald-500/20 blur-3xl animate-pulse" />
     </div>
   ),
