@@ -24,7 +24,7 @@ export default function TimelineBeam() {
       period: "May 2026 — Present",
       role: "Operations Executive (Zomato Process)",
       company: "Startek",
-      location: "Bengaluru, India",
+      location: "Lucknow, India",
       badge: "Current Role // Non-Tech Operations",
       badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
       type: "work",
@@ -51,7 +51,7 @@ export default function TimelineBeam() {
       ],
     },
     {
-      period: "Jul 2024 — Sep 2025",
+      period: "Dec 2024 — Sep 2025",
       role: "Associate Software Developer (Front-End)",
       company: "DataTerrain Private Limited",
       location: "Chennai, India",
@@ -60,7 +60,7 @@ export default function TimelineBeam() {
       type: "work",
       metrics: "30% Redundant API Load Eliminated • Enterprise Scale",
       highlights: [
-        "Engineered enterprise healthcare front-end modules in React.js and TypeScript, handling heavy clinical data dashboards.",
+        "Engineered community, healthcare, and workflow platform front-ends using React.js and TypeScript, handling data-intensive user dashboards.",
         "Architected state management layer using Redux Toolkit and RTK Query with tag-based cache invalidation, cutting redundant client API calls by 30%.",
         "Refactored legacy UI components into reusable, accessible design systems with sub-100ms client-side filtering.",
       ],

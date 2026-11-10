@@ -40,9 +40,9 @@ export default function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
-              <span className="tracking-widest uppercase font-semibold">Front-End Engineer</span>
+              <span className="tracking-widest uppercase font-semibold">Front-End & Mobile Engineer</span>
               <span className="text-zinc-600">•</span>
-              <span className="text-zinc-300">React & TypeScript Specialist</span>
+              <span className="text-zinc-300">React, TypeScript & Flutter</span>
             </div>
           </div>
 
@@ -50,14 +50,14 @@ export default function Hero() {
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.04] mb-6">
             Building fast,{" "}
             <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-200 bg-clip-text text-transparent">
-              accessible React
+              accessible React & Flutter
             </span>{" "}
             interfaces.
           </h1>
 
           {/* Credibility Paragraph */}
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl mb-8">
-            Front-End Engineer with enterprise experience at{" "}
+            Front-End & Mobile Engineer with enterprise experience at{" "}
             <span className="text-white font-medium underline decoration-emerald-500/50 underline-offset-4">
               DataTerrain
             </span>{" "}
@@ -70,7 +70,7 @@ export default function Hero() {
             >
               VNB Diapers
             </a>
-            . Currently Operations Executive at{" "}
+            . Specialized in React, Next.js, Flutter, Dart, REST API integration, and production bug fixing. Currently Operations Executive at{" "}
             <span className="text-white font-medium">Startek</span> (Zomato Process).
           </p>
 
@@ -113,6 +113,17 @@ export default function Hero() {
               <span>Explore Work Deck</span>
               <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-1" />
             </MagneticButton>
+
+            <a
+              href="https://www.fiverr.com/s/8xyp7XZ"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => playSound("chord")}
+              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-mono text-xs uppercase tracking-wider font-bold transition-all shadow-lg shadow-emerald-500/25 active:scale-95 cursor-pointer"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>Hire on Fiverr ↗</span>
+            </a>
 
             <button
               onClick={() => scrollTo("sandbox")}

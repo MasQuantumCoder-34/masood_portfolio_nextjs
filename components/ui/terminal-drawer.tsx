@@ -70,8 +70,9 @@ export default function TerminalDrawer() {
         output = (
           <div className="space-y-1 text-xs font-mono text-zinc-400">
             <p><span className="text-emerald-400">help</span> - List available commands</p>
-            <p><span className="text-emerald-400">skills</span> - Display categorized engineering stack</p>
+            <p><span className="text-emerald-400">skills</span> - Display categorized engineering stack (React, Flutter, etc.)</p>
             <p><span className="text-emerald-400">projects</span> - View production web platforms</p>
+            <p><span className="text-emerald-400">fiverr</span> - Open Fiverr bug-fixing & development gig</p>
             <p><span className="text-emerald-400">contact</span> - Show direct contact information</p>
             <p><span className="text-emerald-400">resume</span> - Download official curriculum vitae</p>
             <p><span className="text-emerald-400">clear</span> - Clear terminal output</p>
@@ -83,10 +84,22 @@ export default function TerminalDrawer() {
       case "skills":
         output = (
           <div className="space-y-1 text-xs font-mono text-zinc-300">
-            <p className="text-white font-semibold">Core UI & Architecture:</p>
-            <p className="text-zinc-400">React 19, Next.js 16 (App Router), TypeScript, Tailwind CSS v4</p>
-            <p className="text-white font-semibold pt-1">State & Systems:</p>
-            <p className="text-zinc-400">Redux Toolkit, RTK Query, TanStack Query, Firebase RTDB, MongoDB</p>
+            <p className="text-white font-semibold">Web & Mobile Core:</p>
+            <p className="text-zinc-400">React 19, Next.js 16 (App Router), TypeScript, Flutter, Dart, Tailwind CSS v4</p>
+            <p className="text-white font-semibold pt-1">State, APIs & Debugging:</p>
+            <p className="text-zinc-400">Redux Toolkit, RTK Query, REST API Integration, Bug Fixing, Firebase RTDB, MongoDB</p>
+          </div>
+        )
+        break
+
+      case "fiverr":
+      case "hire":
+        playSound("chord")
+        window.open("https://www.fiverr.com/s/8xyp7XZ", "_blank")
+        output = (
+          <div className="text-xs font-mono text-emerald-300">
+            <p>Opening Fiverr gig: https://www.fiverr.com/s/8xyp7XZ</p>
+            <p className="text-zinc-400">Services: Bug fixing, Flutter & Dart UI, React state debugging, and API integration.</p>
           </div>
         )
         break

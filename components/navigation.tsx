@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
-import { Volume2, VolumeX, Terminal, Sparkles, Compass } from "lucide-react"
+import { Volume2, VolumeX, Terminal, Sparkles, Compass, ExternalLink } from "lucide-react"
 import { playSound, toggleAudioMute, isAudioMuted } from "@/components/sound/audio-engine"
 
 export default function Navigation() {
@@ -120,6 +120,23 @@ export default function Navigation() {
 
         {/* Right Controls HUD */}
         <div className="flex items-center gap-2">
+          {/* Direct Fiverr "Hire Me" CTA */}
+          <a
+            href="https://www.fiverr.com/s/8xyp7XZ"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => playSound("chord")}
+            className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-mono text-xs font-bold transition-all shadow-lg shadow-emerald-500/25 active:scale-95 cursor-pointer group whitespace-nowrap"
+            title="Order Bug-Fixing & Engineering on Fiverr"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-black" />
+            </span>
+            <span>Hire Me</span>
+            <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+
           {/* Audio Visualizer / Mute Toggle */}
           <button
             onClick={handleMuteToggle}

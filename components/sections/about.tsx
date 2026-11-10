@@ -5,9 +5,9 @@ export default function About() {
     {
       period: "May 2026 — Present",
       title: "Operations Executive (Zomato Process)",
-      organization: "Startek",
+      organization: "Startek • Lucknow",
       description:
-        "Joined on May 27, 2026. Managing operational execution, process compliance, performance metrics, and structured cross-functional issue resolution for the Zomato process to maintain consistent daily service delivery.",
+        "Joined on May 27, 2026. Managing operational execution, process compliance, performance metrics, and structured cross-functional issue resolution for the Zomato process in Lucknow to maintain consistent daily service delivery.",
     },
     {
       period: "Oct 2025 — May 2026",
@@ -17,11 +17,11 @@ export default function About() {
         "Delivered production web applications and commercial platforms for clients, including the VNB Diapers e-commerce storefront (live catalog sync, instant sizing, WhatsApp order routing) and responsive CRM dashboards built with React, Next.js, and TypeScript.",
     },
     {
-      period: "Jul 2024 — Sep 2025",
+      period: "Dec 2024 — Sep 2025",
       title: "Associate Software Developer (Front-End)",
       organization: "DataTerrain Private Limited • Chennai",
       description:
-        "Completed tenure in September 2025. Engineered responsive healthcare front-end systems using React.js and TypeScript. Architected state management pipelines with Redux Toolkit and RTK Query, cutting client API redundancy by 30% across data-heavy clinical workflows.",
+        "Completed tenure in September 2025. Engineered responsive community, healthcare, and workflow platform front-ends using React.js and TypeScript. Architected state management pipelines with Redux Toolkit and RTK Query, cutting client API redundancy by 30%.",
     },
     {
       period: "2024",

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import TiltCard from "@/components/ui/tilt-card"
-import { Sparkles, Layers } from "lucide-react"
+import { Sparkles, Layers, Bug, Wrench, ArrowUpRight, Zap, CheckCircle2 } from "lucide-react"
 import { playSound } from "@/components/sound/audio-engine"
 
 export default function Projects() {
@@ -22,20 +22,22 @@ export default function Projects() {
       tags: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "TanStack Query", "MongoDB"],
       image: "/vnb-diapers.jpg",
       link: "https://vnbdiaper.vercel.app/",
+      fiverrNote: true,
     },
     {
       id: "02",
-      title: "DataTerrain Healthcare Analytics Portal",
-      category: "Enterprise Clinical Intelligence & Reporting",
-      metric: "-30% Redundant API Load • Enterprise Scale",
+      title: "MufarTech Parent Commercial Platform",
+      category: "Main Parent Website & Digital Agency Hub",
+      metric: "Lighthouse 98 • Modern React Architecture",
       filterType: "enterprise",
       problem:
-        "Enterprise healthcare client suffered from redundant network requests and slow rendering when clinicians filtered multi-thousand record diagnostic tables.",
+        "Commercial digital agency required a high-performance, polished digital gateway to present enterprise services, client portfolio deliverables, and streamlined project enquiry flows.",
       outcome:
-        "Architected normalized caching layer with Redux Toolkit and RTK Query with tag-based cache invalidation, cutting client API redundancy by 30% and enabling sub-100ms multi-column clinical filtering.",
-      tags: ["React.js", "TypeScript", "RTK Query", "Redux Toolkit", "Tailwind CSS", "REST APIs"],
+        "Architected and deployed the main parent website for MufarTech with responsive Next.js and TypeScript, modern micro-interactions, zero layout shift, and SEO-optimized web architecture.",
+      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel", "Web Performance"],
       image: "/mufar_tech_1.png",
       link: "https://mufartech-website.vercel.app",
+      fiverrNote: true,
     },
     {
       id: "03",
@@ -50,6 +52,7 @@ export default function Projects() {
       tags: ["React", "TypeScript", "State Architecture", "Tailwind CSS"],
       image: "/task_1.png",
       link: "https://mufar-tech-tasks.vercel.app",
+      fiverrNote: true,
     },
     {
       id: "04",
@@ -64,6 +67,7 @@ export default function Projects() {
       tags: ["React", "TypeScript", "Form Validation", "Radix UI"],
       image: "/forms_1.png",
       link: "https://mufar-tech-forms.vercel.app",
+      fiverrNote: true,
     },
     {
       id: "05",
@@ -78,6 +82,7 @@ export default function Projects() {
       tags: ["React", "TypeScript", "CRM", "Dashboard UI"],
       image: "/crm_1.png",
       link: "https://mufar-tech-crm.vercel.app",
+      fiverrNote: true,
     },
     {
       id: "06",
@@ -105,7 +110,7 @@ export default function Projects() {
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
               <Sparkles className="w-3.5 h-3.5" />
@@ -115,7 +120,7 @@ export default function Projects() {
               Signature Production Works
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base mt-2 max-w-xl">
-              Production web applications and enterprise portals engineered with React, Next.js, and TypeScript. Hover to engage 3D perspective tilt and specular spotlight.
+              Production web applications, parent agency showcases, and commercial platforms engineered with React, Next.js, Flutter, and TypeScript. Hover to engage 3D perspective tilt.
             </p>
           </div>
 
@@ -160,6 +165,48 @@ export default function Projects() {
             >
               Enterprise Systems
             </button>
+          </div>
+        </div>
+
+        {/* High-Impact Fiverr Bug-Fixing & API Integration Callout Banner */}
+        <div className="mb-12 p-6 sm:p-8 rounded-3xl border border-emerald-500/30 bg-gradient-to-r from-emerald-950/40 via-zinc-950/80 to-cyan-950/40 backdrop-blur-2xl shadow-2xl relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 blur-3xl rounded-full pointer-events-none" />
+          
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
+            <div className="space-y-2 max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-semibold">
+                <Wrench className="w-3.5 h-3.5" />
+                <span>Freelance Service Available</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                Need a bug fixed in a similar app? Order my bug-fixing service here.
+              </h3>
+              <p className="text-sm text-zinc-300 leading-relaxed">
+                Specialized in <strong className="text-white">Flutter & Dart</strong> mobile UI fixes, <strong className="text-white">React & Next.js</strong> state debugging, <strong className="text-white">REST API integration</strong>, cache invalidation, and production frontend patching. Fast turnaround guaranteed.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-1 font-mono text-[11px] text-zinc-400">
+                <span className="flex items-center gap-1 bg-black/50 px-2.5 py-1 rounded-lg border border-white/5">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-400" /> Flutter & Dart Fixes
+                </span>
+                <span className="flex items-center gap-1 bg-black/50 px-2.5 py-1 rounded-lg border border-white/5">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-400" /> API Integration
+                </span>
+                <span className="flex items-center gap-1 bg-black/50 px-2.5 py-1 rounded-lg border border-white/5">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-400" /> React State & UI Bugs
+                </span>
+              </div>
+            </div>
+
+            <a
+              href="https://www.fiverr.com/s/8xyp7XZ"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => playSound("chord")}
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all shadow-xl shadow-emerald-500/25 active:scale-95 group/btn whitespace-nowrap cursor-pointer"
+            >
+              <span>Order Bug-Fixing on Fiverr</span>
+              <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+            </a>
           </div>
         </div>
 

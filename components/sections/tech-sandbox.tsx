@@ -20,11 +20,16 @@ interface TechBadge {
 
 const TECH_ITEMS = [
   { label: "React 19", category: "core", color: "rgba(16, 185, 129, 0.15)", border: "#10b981", text: "#34d399" },
+  { label: "Flutter", category: "core", color: "rgba(2, 86, 155, 0.2)", border: "#02569B", text: "#54c5f8" },
+  { label: "Dart", category: "core", color: "rgba(1, 117, 194, 0.2)", border: "#0175C2", text: "#40c4ff" },
   { label: "Next.js 16", category: "core", color: "rgba(255, 255, 255, 0.12)", border: "#ffffff", text: "#ffffff" },
   { label: "TypeScript", category: "core", color: "rgba(59, 130, 246, 0.15)", border: "#3b82f6", text: "#60a5fa" },
+  { label: "Bug Fixing", category: "core", color: "rgba(239, 68, 68, 0.2)", border: "#ef4444", text: "#f87171" },
+  { label: "API Integration", category: "state", color: "rgba(16, 185, 129, 0.2)", border: "#10b981", text: "#34d399" },
   { label: "RTK Query", category: "state", color: "rgba(168, 85, 247, 0.15)", border: "#a855f7", text: "#c084fc" },
   { label: "Redux Toolkit", category: "state", color: "rgba(139, 92, 246, 0.15)", border: "#8b5cf6", text: "#a78bfa" },
   { label: "Tailwind v4", category: "styling", color: "rgba(6, 182, 212, 0.15)", border: "#06b6d4", text: "#22d3ee" },
+  { label: "Cross-Platform UI", category: "styling", color: "rgba(168, 85, 247, 0.2)", border: "#a855f7", text: "#d8b4fe" },
   { label: "Three.js", category: "styling", color: "rgba(245, 158, 11, 0.15)", border: "#f59e0b", text: "#fbbf24" },
   { label: "TanStack Query", category: "state", color: "rgba(239, 68, 68, 0.15)", border: "#ef4444", text: "#f87171" },
   { label: "MongoDB", category: "infra", color: "rgba(34, 197, 94, 0.15)", border: "#22c55e", text: "#4ade80" },

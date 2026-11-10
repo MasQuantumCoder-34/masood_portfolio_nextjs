@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react"
 import { playSound } from "@/components/sound/audio-engine"
-import { ExternalLink, ArrowUpRight, Lock, CheckCircle2 } from "lucide-react"
+import { ExternalLink, ArrowUpRight, Lock, Wrench, Bug } from "lucide-react"
 
 interface TiltCardProps {
   id: string
@@ -15,6 +15,7 @@ interface TiltCardProps {
   link?: string
   image: string
   confidential?: boolean
+  fiverrNote?: boolean
 }
 
 export default function TiltCard({
@@ -28,6 +29,7 @@ export default function TiltCard({
   link,
   image,
   confidential,
+  fiverrNote = false,
 }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const [transform, setTransform] = useState("perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)")
@@ -139,6 +141,29 @@ export default function TiltCard({
             </p>
           </div>
         </div>
+
+        {/* Fiverr Bug-Fixing Note */}
+        {fiverrNote && (
+          <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-300 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-1.5">
+              <Bug className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+              <span className="line-clamp-1">Need a bug fixed in a similar app?</span>
+            </div>
+            <a
+              href="https://www.fiverr.com/s/8xyp7XZ"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.stopPropagation()
+                playSound("snap")
+              }}
+              className="text-white hover:text-emerald-200 underline font-semibold flex items-center gap-1 whitespace-nowrap"
+            >
+              <span>Order fix here</span>
+              <ArrowUpRight className="w-3 h-3" />
+            </a>
+          </div>
+        )}
 
         {/* Tech Stack Chips & Action Link */}
         <div className="pt-4 border-t border-white/10 flex items-center justify-between">

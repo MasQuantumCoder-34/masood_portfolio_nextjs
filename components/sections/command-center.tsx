@@ -246,7 +246,7 @@ export default function CommandCenter() {
           <span className="text-zinc-600">•</span>
           <span className="inline-flex items-center gap-1.5 text-zinc-300">
             <Globe className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Bengaluru / Chennai, IN (IST)</span>
+            <span>Lucknow, IN (IST)</span>
             <span className="text-white font-semibold font-mono ml-1">{time || "12:00:00 PM"}</span>
           </span>
         </div>
@@ -262,12 +262,23 @@ export default function CommandCenter() {
             Ready to engineer something extraordinary?
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed font-normal">
-            Open to front-end engineering roles, performance consulting, and modern React architectures. Click below to copy direct email with micro-celebration.
+            Open to front-end & mobile engineering roles, Flutter & React bug fixing, API integrations, and contract architectures. Click below to copy email or order on Fiverr.
           </p>
         </div>
 
         {/* Magnetic Action Controls */}
         <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
+          <a
+            href="https://www.fiverr.com/s/8xyp7XZ"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => playSound("chord")}
+            className="inline-flex items-center gap-2 px-6 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-mono text-xs sm:text-sm uppercase tracking-wider font-bold transition-all shadow-xl shadow-emerald-500/25 active:scale-95 cursor-pointer"
+          >
+            <Sparkles className="w-4 h-4" />
+            <span>Order on Fiverr ↗</span>
+          </a>
+
           <button
             onClick={copyEmail}
             className="inline-flex items-center gap-2.5 px-7 py-4 rounded-2xl bg-white hover:bg-zinc-200 text-black font-mono text-sm font-semibold shadow-2xl shadow-white/10 transition-all cursor-pointer active:scale-95"
