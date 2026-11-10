@@ -72,28 +72,28 @@ export default function TiltCard({
         transition: "transform 0.15s ease-out",
         transformStyle: "preserve-3d",
       }}
-      className="group relative rounded-3xl border border-white/10 bg-zinc-950/70 backdrop-blur-2xl p-5 sm:p-7 lg:p-8 overflow-hidden shadow-2xl hover:border-emerald-500/40 transition-all duration-300"
+      className="group relative rounded-3xl border border-black/10 dark:border-white/10 bg-white/90 dark:bg-zinc-950/70 backdrop-blur-2xl p-6 sm:p-7 lg:p-8 overflow-hidden shadow-xl dark:shadow-2xl hover:border-emerald-500/40 transition-all duration-300"
     >
       {/* Cursor-Aware Specular Spotlight */}
       <div
         className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
         style={{
-          background: `radial-gradient(420px circle at ${spotlightPos.x}px ${spotlightPos.y}px, rgba(52, 211, 153, 0.15), transparent 70%)`,
+          background: `radial-gradient(420px circle at ${spotlightPos.x}px ${spotlightPos.y}px, rgba(52, 211, 153, 0.12), transparent 70%)`,
         }}
       />
 
-      <div className="relative z-20 flex flex-col justify-between h-full space-y-4 sm:space-y-6">
+      <div className="relative z-20 flex flex-col justify-between h-full space-y-5 sm:space-y-6">
         {/* Top Header: ID & Live Metric Badge */}
         <div className="flex items-center justify-between">
-          <span className="font-mono text-xs text-zinc-500 uppercase tracking-widest">{id} // SPEC</span>
+          <span className="font-mono text-xs text-slate-500 dark:text-zinc-500 uppercase tracking-widest">{id} // SPEC</span>
           {confidential ? (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-zinc-900 text-zinc-400 border border-white/10">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-slate-100 dark:bg-zinc-900 text-slate-700 dark:text-zinc-400 border border-black/10 dark:border-white/10">
               <Lock className="w-3 h-3" />
               Confidential
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
               {metric}
             </span>
           )}
@@ -101,7 +101,7 @@ export default function TiltCard({
 
         {/* Image Preview with Parallax Tilt */}
         {confidential ? (
-          <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 bg-black/50 flex items-center justify-center">
+          <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/50 flex items-center justify-center">
             <img src={image} alt={title} className="w-full h-full object-cover grayscale opacity-30" />
             <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
               <Lock className="w-6 h-6 text-zinc-400" />
@@ -112,7 +112,7 @@ export default function TiltCard({
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 block group/img cursor-pointer"
+            className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 block group/img cursor-pointer shadow-sm dark:shadow-none"
           >
             <img
               src={image}
@@ -128,26 +128,26 @@ export default function TiltCard({
 
         {/* Narrative & Engineering Impact */}
         <div className="space-y-2.5 sm:space-y-3">
-          <p className="text-xs font-mono uppercase tracking-wider text-emerald-400/90">{category}</p>
-          <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
+          <p className="text-xs font-mono uppercase tracking-wider text-emerald-700 dark:text-emerald-400/90 font-semibold">{category}</p>
+          <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
             {title}
           </h3>
-          <div className="space-y-2 text-sm text-zinc-300 leading-relaxed">
+          <div className="space-y-2 text-sm text-slate-700 dark:text-zinc-300 leading-relaxed font-normal">
             <p>
-              <strong className="text-zinc-100 font-medium">Problem:</strong> {problem}
+              <strong className="text-slate-900 dark:text-zinc-100 font-medium">Problem:</strong> {problem}
             </p>
             <p>
-              <strong className="text-zinc-100 font-medium">Outcome:</strong> {outcome}
+              <strong className="text-slate-900 dark:text-zinc-100 font-medium">Outcome:</strong> {outcome}
             </p>
           </div>
         </div>
 
         {/* Fiverr Bug-Fixing Note */}
         {fiverrNote && (
-          <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-300 flex items-center justify-between gap-2">
+          <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-800 dark:text-emerald-300 flex items-center justify-between gap-2">
             <div className="flex items-center gap-1.5">
-              <Bug className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
-              <span className="line-clamp-1">Need a bug fixed in a similar app?</span>
+              <Bug className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+              <span className="line-clamp-1 font-medium">Need a bug fixed in a similar app?</span>
             </div>
             <a
               href="https://www.fiverr.com/s/8xyp7XZ"
@@ -157,7 +157,7 @@ export default function TiltCard({
                 e.stopPropagation()
                 playSound("snap")
               }}
-              className="text-white hover:text-emerald-200 underline font-semibold flex items-center gap-1 whitespace-nowrap"
+              className="text-slate-900 dark:text-white hover:text-emerald-700 dark:hover:text-emerald-200 underline font-semibold flex items-center gap-1 whitespace-nowrap"
             >
               <span>Order fix here</span>
               <ArrowUpRight className="w-3 h-3" />
@@ -166,12 +166,12 @@ export default function TiltCard({
         )}
 
         {/* Tech Stack Chips & Action Link */}
-        <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+        <div className="pt-4 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
           <div className="flex flex-wrap gap-1.5">
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-white/10 text-[11px] font-mono text-zinc-300"
+                className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-zinc-900 border border-black/5 dark:border-white/10 text-[11px] font-mono text-slate-800 dark:text-zinc-300 font-medium"
               >
                 {tag}
               </span>
@@ -179,7 +179,7 @@ export default function TiltCard({
           </div>
 
           {confidential ? (
-            <span className="inline-flex items-center gap-1 text-xs font-mono text-zinc-500 ml-4 whitespace-nowrap">
+            <span className="inline-flex items-center gap-1 text-xs font-mono text-slate-500 dark:text-zinc-500 ml-4 whitespace-nowrap">
               <span>NDA Protected</span>
             </span>
           ) : (
@@ -187,7 +187,7 @@ export default function TiltCard({
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-emerald-500 hover:text-black border border-white/10 text-xs font-mono font-semibold text-white transition-all ml-4 whitespace-nowrap group/link active:scale-95"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-emerald-500 hover:text-black border border-black/10 dark:border-white/10 text-xs font-mono font-semibold text-slate-800 dark:text-white transition-all ml-4 whitespace-nowrap group/link active:scale-95"
             >
               <span>Visit</span>
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />

@@ -123,22 +123,22 @@ export default function ArchitectureNode() {
   }, [])
 
   return (
-    <section id="architecture" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/10 bg-black/60 overflow-hidden">
+    <section id="architecture" className="relative py-16 sm:py-20 lg:py-24 px-5 sm:px-6 border-b border-black/5 dark:border-white/10 bg-slate-50 dark:bg-black/60 overflow-hidden transition-colors duration-300">
       {/* Ambient background volumetric glow */}
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[300px] bg-cyan-500/10 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 sm:mb-10">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono text-xs uppercase tracking-widest mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-widest mb-3">
               <Activity className="w-3.5 h-3.5" />
               <span>Section 05 // Interactive Topology</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-foreground">
+            <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-slate-900 dark:text-foreground">
               Full-Stack Architecture Simulator
             </h2>
-            <p className="text-muted-foreground text-sm sm:text-base mt-2 max-w-xl">
+            <p className="text-slate-600 dark:text-muted-foreground text-sm sm:text-base mt-2 max-w-xl font-normal">
               Click below to fire a live data transaction packet across the real-time client-to-cloud pipeline. Watch state normalization, cache deduplication, and automated dispatch in action.
             </p>
           </div>
@@ -148,7 +148,7 @@ export default function ArchitectureNode() {
             disabled={isSimulating}
             className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-mono text-xs uppercase tracking-wider font-semibold transition-all cursor-pointer shadow-xl ${
               isSimulating
-                ? "bg-zinc-800 text-zinc-400 cursor-not-allowed border border-white/5"
+                ? "bg-slate-200 text-slate-500 dark:bg-zinc-800 dark:text-zinc-400 cursor-not-allowed border border-black/5 dark:border-white/5"
                 : "bg-cyan-500 hover:bg-cyan-400 text-black shadow-cyan-500/20 active:scale-95"
             }`}
           >
@@ -167,9 +167,9 @@ export default function ArchitectureNode() {
         </div>
 
         {/* Node Pipeline Visualizer */}
-        <div className="relative p-4 sm:p-8 rounded-3xl border border-white/10 bg-zinc-950/80 backdrop-blur-2xl shadow-2xl mb-6 overflow-hidden">
+        <div className="relative p-5 sm:p-8 rounded-3xl border border-black/10 dark:border-white/10 bg-white/90 dark:bg-zinc-950/80 backdrop-blur-2xl shadow-xl dark:shadow-2xl mb-8 overflow-hidden">
           {/* Neon energy beam connecting nodes in desktop */}
-          <div className="hidden lg:block absolute top-[86px] left-[10%] right-[10%] h-[2px] bg-white/10 z-0">
+          <div className="hidden lg:block absolute top-[86px] left-[10%] right-[10%] h-[2px] bg-black/10 dark:bg-white/10 z-0">
             {/* Animated Packet */}
             {isSimulating && (
               <div
@@ -181,7 +181,7 @@ export default function ArchitectureNode() {
             )}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 sm:gap-6 relative z-10">
             {steps.map((step, idx) => {
               const Icon = step.icon
               const isCurrent = activeStep === idx
@@ -196,10 +196,10 @@ export default function ArchitectureNode() {
                   }}
                   className={`relative p-5 rounded-2xl border transition-all duration-300 cursor-pointer text-left ${
                     isCurrent
-                      ? "bg-cyan-500/15 border-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.25)] scale-[1.03]"
+                      ? "bg-cyan-500/10 border-cyan-500 shadow-[0_0_30px_rgba(6,182,212,0.2)] dark:bg-cyan-500/15 dark:border-cyan-400 scale-[1.02]"
                       : isDone
                       ? "bg-emerald-500/10 border-emerald-500/30"
-                      : "bg-zinc-900/50 border-white/10 hover:border-white/20"
+                      : "bg-slate-100/80 dark:bg-zinc-900/50 border-black/5 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20"
                   }`}
                 >
                   {/* Step status icon */}
@@ -209,8 +209,8 @@ export default function ArchitectureNode() {
                         isCurrent
                           ? "bg-cyan-400 text-black border-cyan-300 shadow-md shadow-cyan-400/30"
                           : isDone
-                          ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
-                          : "bg-white/5 text-zinc-400 border-white/10"
+                          ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/40"
+                          : "bg-slate-200/70 dark:bg-white/5 text-slate-600 dark:text-zinc-400 border-black/5 dark:border-white/10"
                       }`}
                     >
                       <Icon className="w-5 h-5" />
@@ -219,26 +219,26 @@ export default function ArchitectureNode() {
                     <span
                       className={`font-mono text-[10px] px-2 py-0.5 rounded-full border ${
                         isCurrent
-                          ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/30 animate-pulse"
+                          ? "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border-cyan-400/40 animate-pulse font-medium"
                           : isDone
-                          ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
-                          : "bg-white/5 text-zinc-500 border-white/5"
+                          ? "bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border-emerald-500/30 font-medium"
+                          : "bg-black/5 dark:bg-white/5 text-slate-500 dark:text-zinc-500 border-black/5 dark:border-white/5"
                       }`}
                     >
                       {step.latency}
                     </span>
                   </div>
 
-                  <div className="font-mono text-[10px] text-zinc-500 mb-1">
+                  <div className="font-mono text-[10px] text-slate-400 dark:text-zinc-500 mb-1">
                     0{idx + 1} // LAYER
                   </div>
-                  <h3 className="font-medium text-sm text-foreground mb-1 leading-snug">
+                  <h3 className="font-semibold text-sm text-slate-900 dark:text-foreground mb-1 leading-snug">
                     {step.title}
                   </h3>
-                  <div className="text-[11px] font-mono text-muted-foreground mb-3">
+                  <div className="text-[11px] font-mono text-slate-500 dark:text-muted-foreground mb-3">
                     {step.tech}
                   </div>
-                  <p className="text-xs text-zinc-400 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed font-normal">
                     {step.details}
                   </p>
                 </div>

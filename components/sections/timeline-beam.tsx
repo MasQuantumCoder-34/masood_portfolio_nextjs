@@ -113,21 +113,21 @@ export default function TimelineBeam() {
   }, [])
 
   return (
-    <section id="timeline" ref={containerRef} className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/10 bg-black/80 overflow-hidden">
+    <section id="timeline" ref={containerRef} className="relative py-16 sm:py-20 lg:py-24 px-5 sm:px-6 border-b border-black/5 dark:border-white/10 bg-slate-100/50 dark:bg-black/80 overflow-hidden transition-colors duration-300">
       {/* Ambient background volumetric glow */}
       <div className="absolute top-1/2 right-1/4 w-[450px] h-[450px] bg-purple-500/10 blur-[150px] rounded-full pointer-events-none" />
 
       <div className="max-w-5xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="mb-8 sm:mb-12 text-center max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
+        <div className="mb-10 sm:mb-14 text-center max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Section 06 // The Lightbeam Path</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-foreground">
+          <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-slate-900 dark:text-foreground">
             Career Timeline & Milestones
           </h2>
-          <p className="text-muted-foreground text-sm sm:text-base mt-2">
+          <p className="text-slate-600 dark:text-muted-foreground text-sm sm:text-base mt-2 font-normal">
             A vertical laser lightbeam draws itself in lockstep with scroll progress, illuminating career milestones from enterprise engineering to operations executive.
           </p>
         </div>
@@ -135,22 +135,22 @@ export default function TimelineBeam() {
         {/* Timeline Container */}
         <div className="relative pl-6 sm:pl-10 lg:pl-12">
           {/* Vertical Track Background Line */}
-          <div className="absolute left-[18px] sm:left-[22px] lg:left-[26px] top-4 bottom-4 w-[2px] bg-white/10" />
+          <div className="absolute left-[18px] sm:left-[22px] lg:left-[26px] top-4 bottom-4 w-[2px] bg-black/10 dark:bg-white/10" />
 
           {/* Glowing Animated Laser Lightbeam */}
           <div
-            className="absolute left-[18px] sm:left-[22px] lg:left-[26px] top-4 w-[2px] bg-gradient-to-b from-emerald-400 via-cyan-400 to-emerald-300 shadow-[0_0_12px_#34d399] transition-all duration-300 ease-out origin-top"
+            className="absolute left-[18px] sm:left-[22px] lg:left-[26px] top-4 w-[2px] bg-gradient-to-b from-emerald-500 via-cyan-400 to-emerald-400 dark:from-emerald-400 dark:via-cyan-400 dark:to-emerald-300 shadow-[0_0_12px_#34d399] transition-all duration-300 ease-out origin-top"
             style={{
               height: `${scrollProgress * 96}%`,
             }}
           >
             {/* Pulsing Laser Head */}
-            <div className="absolute bottom-0 -left-[5px] w-3 h-3 rounded-full bg-emerald-300 shadow-[0_0_20px_#10b981] animate-ping" />
+            <div className="absolute bottom-0 -left-[5px] w-3 h-3 rounded-full bg-emerald-400 dark:bg-emerald-300 shadow-[0_0_20px_#10b981] animate-ping" />
             <div className="absolute bottom-0 -left-[3px] w-2 h-2 rounded-full bg-white shadow-[0_0_10px_#ffffff]" />
           </div>
 
           {/* Milestone Cards */}
-          <div className="space-y-6 sm:space-y-8 lg:space-y-10">
+          <div className="space-y-8 sm:space-y-10 lg:space-y-12">
             {milestones.map((item, idx) => {
               const cardThreshold = (idx + 0.5) / milestones.length
               const isPassed = scrollProgress >= cardThreshold
@@ -161,23 +161,23 @@ export default function TimelineBeam() {
                   <div
                     className={`absolute -left-[27px] sm:-left-[31px] lg:-left-[35px] top-6 w-5 h-5 rounded-full border-2 transition-all duration-500 flex items-center justify-center ${
                       isPassed
-                        ? "bg-black border-emerald-400 shadow-[0_0_16px_#10b981] scale-110"
-                        : "bg-zinc-900 border-white/20"
+                        ? "bg-white dark:bg-black border-emerald-500 dark:border-emerald-400 shadow-[0_0_16px_#10b981] scale-110"
+                        : "bg-slate-200 dark:bg-zinc-900 border-black/20 dark:border-white/20"
                     }`}
                   >
                     <div
                       className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        isPassed ? "bg-emerald-400 animate-pulse" : "bg-zinc-600"
+                        isPassed ? "bg-emerald-500 dark:bg-emerald-400 animate-pulse" : "bg-slate-400 dark:bg-zinc-600"
                       }`}
                     />
                   </div>
 
                   {/* Card Body */}
                   <div
-                    className={`p-5 sm:p-7 rounded-3xl border transition-all duration-500 backdrop-blur-2xl shadow-xl ${
+                    className={`p-6 sm:p-7 rounded-3xl border transition-all duration-500 backdrop-blur-2xl shadow-lg dark:shadow-xl ${
                       isPassed
-                        ? "bg-zinc-950/80 border-white/15 hover:border-emerald-500/40 shadow-emerald-500/5 translate-x-1"
-                        : "bg-zinc-950/40 border-white/5 opacity-80"
+                        ? "bg-white/95 dark:bg-zinc-950/80 border-black/10 dark:border-white/15 hover:border-emerald-500/40 shadow-emerald-500/5 translate-x-1"
+                        : "bg-white/60 dark:bg-zinc-950/40 border-black/5 dark:border-white/5 opacity-80"
                     }`}
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
@@ -186,35 +186,35 @@ export default function TimelineBeam() {
                           {item.badge}
                         </span>
                         {item.metrics && (
-                          <span className="font-mono text-xs text-zinc-400 bg-white/5 px-2.5 py-0.5 rounded-full border border-white/5">
+                          <span className="font-mono text-xs text-slate-600 dark:text-zinc-400 bg-slate-100 dark:bg-white/5 px-2.5 py-0.5 rounded-full border border-black/5 dark:border-white/5">
                             {item.metrics}
                           </span>
                         )}
                       </div>
 
-                      <div className="inline-flex items-center gap-1.5 font-mono text-xs text-zinc-400">
-                        <Calendar className="w-3.5 h-3.5 text-zinc-500" />
+                      <div className="inline-flex items-center gap-1.5 font-mono text-xs text-slate-500 dark:text-zinc-400">
+                        <Calendar className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
                         <span>{item.period}</span>
                       </div>
                     </div>
 
-                    <h3 className="text-xl sm:text-2xl font-semibold text-foreground tracking-tight">
+                    <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-foreground tracking-tight">
                       {item.role}
                     </h3>
                     
-                    <div className="flex items-center gap-2 text-sm text-emerald-400 font-medium mb-4">
+                    <div className="flex items-center gap-2 text-sm text-emerald-700 dark:text-emerald-400 font-medium mb-4">
                       <span>{item.company}</span>
-                      <span className="text-zinc-600">•</span>
-                      <span className="text-zinc-400 font-mono text-xs flex items-center gap-1">
-                        <MapPin className="w-3 h-3 text-zinc-500" />
+                      <span className="text-slate-400 dark:text-zinc-600">•</span>
+                      <span className="text-slate-500 dark:text-zinc-400 font-mono text-xs flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
                         {item.location}
                       </span>
                     </div>
 
-                    <ul className="space-y-2 text-sm text-zinc-300 leading-relaxed font-normal">
+                    <ul className="space-y-2 text-sm text-slate-700 dark:text-zinc-300 leading-relaxed font-normal">
                       {item.highlights.map((bullet, bIdx) => (
                         <li key={bIdx} className="flex items-start gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-400/80 mt-1 flex-shrink-0" />
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400/80 mt-1 flex-shrink-0" />
                           <span>{bullet}</span>
                         </li>
                       ))}

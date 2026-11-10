@@ -66,34 +66,34 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact-form" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/10 bg-black/80 overflow-hidden">
+    <section id="contact-form" className="relative py-16 sm:py-20 lg:py-24 px-5 sm:px-6 border-b border-black/5 dark:border-white/10 bg-slate-50 dark:bg-black/80 overflow-hidden transition-colors duration-300">
       <div className="max-w-5xl mx-auto w-full relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
           {/* Left Column: Direct Inquiries */}
           <div className="md:col-span-5 space-y-4 sm:space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-mono text-xs uppercase tracking-widest mb-2">
               <span>Direct Comms</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
               Let's build something exceptional.
             </h2>
-            <p className="text-sm text-zinc-400 leading-relaxed">
+            <p className="text-sm text-slate-600 dark:text-zinc-400 leading-relaxed font-normal">
               Available for front-end engineering roles, design system consulting, and enterprise web applications. Submit a transmission or connect directly.
             </p>
 
-            <div className="space-y-2.5 sm:space-y-3 pt-4 sm:pt-6 border-t border-white/10">
+            <div className="space-y-2.5 sm:space-y-3 pt-4 sm:pt-6 border-t border-black/10 dark:border-white/10">
               {directChannels.map((item) => (
-                <div key={item.label} className="flex justify-between items-center text-xs font-mono p-3 rounded-xl bg-zinc-900/60 border border-white/5">
-                  <span className="text-zinc-500 uppercase">{item.label}</span>
+                <div key={item.label} className="flex justify-between items-center text-xs font-mono p-3 rounded-xl bg-white/80 dark:bg-zinc-900/60 border border-black/10 dark:border-white/5 shadow-sm dark:shadow-none">
+                  <span className="text-slate-500 dark:text-zinc-500 uppercase">{item.label}</span>
                   <a
                     href={item.href}
                     target={item.label === "Email" || item.label === "Phone" ? undefined : "_blank"}
                     rel={item.label === "Email" || item.label === "Phone" ? undefined : "noopener noreferrer"}
                     onClick={() => playSound("tick")}
-                    className="text-white hover:text-emerald-400 transition-colors inline-flex items-center gap-1 font-semibold"
+                    className="text-slate-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors inline-flex items-center gap-1 font-semibold"
                   >
                     <span>{item.value}</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500" />
+                    <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
                   </a>
                 </div>
               ))}
@@ -104,15 +104,15 @@ export default function Contact() {
           <div className="md:col-span-7">
             <form
               onSubmit={handleSubmit}
-              className="p-5 sm:p-7 rounded-3xl border border-white/10 bg-zinc-950/80 backdrop-blur-2xl shadow-2xl space-y-4"
+              className="p-6 sm:p-8 rounded-3xl border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-950/80 backdrop-blur-2xl shadow-xl dark:shadow-2xl space-y-4"
             >
-              <h3 className="text-lg font-semibold text-white tracking-tight mb-2">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white tracking-tight mb-2">
                 Send Direct Message
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[11px] font-mono text-zinc-400 uppercase mb-1.5">
+                  <label className="block text-[11px] font-mono text-slate-600 dark:text-zinc-400 uppercase mb-1.5">
                     Your Name
                   </label>
                   <input
@@ -122,11 +122,11 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="Alex Morgan"
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-400 font-mono transition-colors"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-black/60 border border-black/10 dark:border-white/10 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500 font-mono transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-mono text-zinc-400 uppercase mb-1.5">
+                  <label className="block text-[11px] font-mono text-slate-600 dark:text-zinc-400 uppercase mb-1.5">
                     Email Address
                   </label>
                   <input
@@ -136,13 +136,13 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="alex@company.com"
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-400 font-mono transition-colors"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-black/60 border border-black/10 dark:border-white/10 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500 font-mono transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[11px] font-mono text-zinc-400 uppercase mb-1.5">
+                <label className="block text-[11px] font-mono text-slate-600 dark:text-zinc-400 uppercase mb-1.5">
                   Subject
                 </label>
                 <input
@@ -152,12 +152,12 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="Front-End Role / Project Discussion"
                   required
-                  className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-400 font-mono transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-black/60 border border-black/10 dark:border-white/10 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500 font-mono transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-mono text-zinc-400 uppercase mb-1.5">
+                <label className="block text-[11px] font-mono text-slate-600 dark:text-zinc-400 uppercase mb-1.5">
                   Message
                 </label>
                 <textarea
@@ -167,7 +167,7 @@ export default function Contact() {
                   placeholder="Write your transmission..."
                   rows={4}
                   required
-                  className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-400 resize-none font-mono transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-black/60 border border-black/10 dark:border-white/10 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500 resize-none font-mono transition-colors"
                 />
               </div>
 

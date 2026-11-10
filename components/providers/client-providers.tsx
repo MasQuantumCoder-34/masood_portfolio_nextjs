@@ -102,7 +102,7 @@ export default function ClientProviders({ children }: { children: React.ReactNod
           <button
             onClick={handleToggleSound}
             onMouseEnter={() => playSound("tick")}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-950/80 border border-white/10 backdrop-blur-xl text-xs font-mono text-zinc-400 hover:text-white transition-all shadow-xl cursor-pointer"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 dark:bg-zinc-950/80 border border-black/10 dark:border-white/10 backdrop-blur-xl text-xs font-mono text-slate-700 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all shadow-xl cursor-pointer"
             aria-label="Toggle sound feedback"
             title={isMuted ? "Audio muted (Click to enable)" : "Audio enabled"}
           >
@@ -113,8 +113,8 @@ export default function ClientProviders({ children }: { children: React.ReactNod
               </>
             ) : (
               <>
-                <Volume2 className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-                <span className="hidden sm:inline text-emerald-400 font-semibold">Sound On</span>
+                <Volume2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 animate-pulse" />
+                <span className="hidden sm:inline text-emerald-600 dark:text-emerald-400 font-semibold">Sound On</span>
               </>
             )}
           </button>
@@ -122,10 +122,10 @@ export default function ClientProviders({ children }: { children: React.ReactNod
           <button
             onClick={openTerminal}
             onMouseEnter={() => playSound("tick")}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-950/80 border border-white/10 backdrop-blur-xl text-xs font-mono text-zinc-400 hover:text-white transition-all shadow-xl cursor-pointer"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 dark:bg-zinc-950/80 border border-black/10 dark:border-white/10 backdrop-blur-xl text-xs font-mono text-slate-700 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all shadow-xl cursor-pointer"
             title="Open Developer Shell (~)"
           >
-            <TerminalIcon className="w-3 h-3 text-emerald-400" />
+            <TerminalIcon className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
             <span>Shell (~)</span>
           </button>
         </aside>

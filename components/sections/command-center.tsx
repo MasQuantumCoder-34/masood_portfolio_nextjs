@@ -118,13 +118,15 @@ function WireframeGlobe() {
       ctx.arc(cx, cy, radius * 1.1, 0, Math.PI * 2)
       ctx.fill()
 
+      const isDark = document.documentElement.classList.contains("dark")
+
       // Latitude lines
       for (let lat = -60; lat <= 60; lat += 20) {
         const rLat = (lat * Math.PI) / 180
         const y = cy + Math.sin(rLat) * radius
         const rAtY = Math.cos(rLat) * radius
 
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)"
+        ctx.strokeStyle = isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(15, 23, 42, 0.1)"
         ctx.lineWidth = 1
         ctx.beginPath()
         ctx.ellipse(cx, y, rAtY, rAtY * 0.25, 0, 0, Math.PI * 2)
@@ -136,7 +138,7 @@ function WireframeGlobe() {
         const rLon = (lon * Math.PI) / 180 + angle
         const rx = Math.sin(rLon) * radius
 
-        ctx.strokeStyle = "rgba(52, 211, 153, 0.15)"
+        ctx.strokeStyle = isDark ? "rgba(52, 211, 153, 0.2)" : "rgba(5, 150, 105, 0.25)"
         ctx.lineWidth = 1
         ctx.beginPath()
         ctx.ellipse(cx, cy, Math.abs(rx), radius, 0, 0, Math.PI * 2)
@@ -144,27 +146,29 @@ function WireframeGlobe() {
       }
 
       // Outer sphere boundary
-      ctx.strokeStyle = "rgba(52, 211, 153, 0.4)"
+      ctx.strokeStyle = isDark ? "rgba(52, 211, 153, 0.4)" : "rgba(5, 150, 105, 0.5)"
       ctx.lineWidth = 1.5
       ctx.beginPath()
       ctx.arc(cx, cy, radius, 0, Math.PI * 2)
       ctx.stroke()
 
-      // India / Bengaluru Locator Pulse (approx coords)
+      // Lucknow, India Locator Pulse (approx coords)
       const pulseX = cx + Math.cos(angle + 1.2) * (radius * 0.5)
       const pulseY = cy + 5
       const pingSize = (Date.now() % 1500) / 1500
 
       ctx.beginPath()
       ctx.arc(pulseX, pulseY, 3 + pingSize * 10, 0, Math.PI * 2)
-      ctx.strokeStyle = `rgba(16, 185, 129, ${1 - pingSize})`
+      ctx.strokeStyle = isDark
+        ? `rgba(16, 185, 129, ${1 - pingSize})`
+        : `rgba(5, 150, 105, ${1 - pingSize})`
       ctx.lineWidth = 1.5
       ctx.stroke()
 
       ctx.beginPath()
       ctx.arc(pulseX, pulseY, 3, 0, Math.PI * 2)
-      ctx.fillStyle = "#34d399"
-      ctx.shadowColor = "#10b981"
+      ctx.fillStyle = isDark ? "#34d399" : "#059669"
+      ctx.shadowColor = isDark ? "#10b981" : "#059669"
       ctx.shadowBlur = 8
       ctx.fill()
       ctx.shadowBlur = 0
@@ -231,43 +235,43 @@ export default function CommandCenter() {
   }
 
   return (
-    <footer id="connect" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-t border-white/10 bg-black overflow-hidden">
+    <footer id="connect" className="relative py-16 sm:py-20 lg:py-24 px-5 sm:px-6 border-t border-black/5 dark:border-white/10 bg-slate-100/70 dark:bg-black overflow-hidden transition-colors duration-300">
       {/* Ambient background volumetric glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-emerald-500/10 blur-[160px] rounded-full pointer-events-none" />
 
       <div className="max-w-5xl mx-auto w-full relative z-10 flex flex-col items-center text-center">
         {/* Availability Badge */}
-        <div className="inline-flex flex-wrap items-center justify-center gap-3 px-4 py-2 rounded-full bg-zinc-900/80 border border-white/10 text-xs font-mono text-zinc-400 shadow-2xl mb-5 sm:mb-6 backdrop-blur-xl">
+        <div className="inline-flex flex-wrap items-center justify-center gap-3 px-4 py-2 rounded-full bg-white/90 dark:bg-zinc-900/80 border border-black/10 dark:border-white/10 text-xs font-mono text-slate-700 dark:text-zinc-400 shadow-md dark:shadow-2xl mb-6 backdrop-blur-xl">
           <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 dark:bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600 dark:bg-emerald-500" />
           </span>
-          <span className="text-white font-medium">Available for Opportunities</span>
-          <span className="text-zinc-600">•</span>
-          <span className="inline-flex items-center gap-1.5 text-zinc-300">
-            <Globe className="w-3.5 h-3.5 text-emerald-400" />
+          <span className="text-slate-900 dark:text-white font-medium">Available for Opportunities</span>
+          <span className="text-slate-400 dark:text-zinc-600">•</span>
+          <span className="inline-flex items-center gap-1.5 text-slate-700 dark:text-zinc-300">
+            <Globe className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
             <span>Lucknow, IN (IST)</span>
-            <span className="text-white font-semibold font-mono ml-1">{time || "12:00:00 PM"}</span>
+            <span className="text-slate-900 dark:text-white font-semibold font-mono ml-1">{time || "12:00:00 PM"}</span>
           </span>
         </div>
 
         {/* 3D Wireframe Telemetry Globe */}
-        <div className="mb-4 sm:mb-6">
+        <div className="mb-6">
           <WireframeGlobe />
         </div>
 
         {/* Global Connection Callout */}
-        <div className="space-y-3 sm:space-y-4 max-w-2xl mx-auto mb-6 sm:mb-8">
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+        <div className="space-y-3 sm:space-y-4 max-w-2xl mx-auto mb-8 sm:mb-10">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">
             Ready to engineer something extraordinary?
           </h2>
-          <p className="text-sm sm:text-base text-zinc-400 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 leading-relaxed font-normal">
             Open to front-end & mobile engineering roles, Flutter & React bug fixing, API integrations, and contract architectures. Click below to copy email or order on Fiverr.
           </p>
         </div>
 
         {/* Magnetic Action Controls */}
-        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12">
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-14">
           <a
             href="https://www.fiverr.com/s/8xyp7XZ"
             target="_blank"
@@ -281,11 +285,11 @@ export default function CommandCenter() {
 
           <button
             onClick={copyEmail}
-            className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-white hover:bg-zinc-200 text-black font-mono text-xs sm:text-sm font-semibold shadow-2xl shadow-white/10 transition-all cursor-pointer active:scale-95"
+            className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:hover:bg-zinc-200 dark:text-black font-mono text-xs sm:text-sm font-semibold shadow-xl shadow-black/10 dark:shadow-white/10 transition-all cursor-pointer active:scale-95"
           >
             {copied ? (
               <>
-                <Check className="w-4 h-4 text-emerald-600" />
+                <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>Email Copied! Check Clipboard</span>
               </>
             ) : (
@@ -299,24 +303,24 @@ export default function CommandCenter() {
           <a
             href={`mailto:${email}`}
             onClick={() => playSound("snap")}
-            className="inline-flex items-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 rounded-2xl bg-white/5 hover:bg-white/15 text-white font-mono text-xs uppercase tracking-wider font-semibold border border-white/10 transition-all backdrop-blur-xl cursor-pointer active:scale-95"
+            className="inline-flex items-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/15 text-slate-900 dark:text-white font-mono text-xs uppercase tracking-wider font-semibold border border-black/10 dark:border-white/10 transition-all backdrop-blur-xl cursor-pointer active:scale-95"
           >
-            <Mail className="w-4 h-4 text-emerald-400" />
+            <Mail className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>Send Email Direct ↗</span>
           </a>
 
           <button
             onClick={openTerminal}
-            className="inline-flex items-center gap-2 px-4 sm:px-5 py-3.5 sm:py-4 rounded-2xl bg-white/5 hover:bg-white/15 text-zinc-400 hover:text-white font-mono text-xs border border-white/10 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 sm:px-5 py-3.5 sm:py-4 rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/15 text-slate-700 dark:text-zinc-400 hover:text-black dark:hover:text-white font-mono text-xs border border-black/10 dark:border-white/10 transition-colors cursor-pointer"
             title="Press ~ key to toggle terminal"
           >
-            <Terminal className="w-4 h-4 text-emerald-400" />
+            <Terminal className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>Launch Shell [~]</span>
           </button>
         </div>
 
         {/* Sub-footer Brand Note */}
-        <div className="w-full pt-6 sm:pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-zinc-500 gap-4">
+        <div className="w-full pt-6 sm:pt-8 border-t border-black/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-slate-500 dark:text-zinc-500 gap-4">
           <div>
             © {new Date().getFullYear()} Mohammed Masood Azhar V. High-Performance Portfolio.
           </div>
@@ -325,12 +329,12 @@ export default function CommandCenter() {
               href="https://vnbdiaper.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-emerald-400 transition-colors"
+              className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
             >
               VNB Diapers Storefront ↗
             </a>
             <span>•</span>
-            <span className="text-zinc-600">60 FPS WebGL Engine</span>
+            <span className="text-slate-400 dark:text-zinc-600">60 FPS WebGL Engine</span>
           </div>
         </div>
       </div>

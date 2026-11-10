@@ -120,22 +120,22 @@ export default function Testimonials() {
   }
 
   return (
-    <section id="testimonials" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/10 bg-black/60 overflow-hidden">
+    <section id="testimonials" className="relative py-16 sm:py-20 lg:py-24 px-5 sm:px-6 border-b border-black/5 dark:border-white/10 bg-slate-50 dark:bg-black/60 overflow-hidden transition-colors duration-300">
       {/* Ambient glow */}
       <div className="absolute top-1/2 right-1/3 w-[450px] h-[300px] bg-emerald-500/10 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="max-w-5xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-8 sm:mb-10">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Section 07 // Endorsements</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-white">
+            <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-slate-900 dark:text-white">
               Peer & Client Endorsements
             </h2>
-            <p className="text-zinc-400 text-sm sm:text-base mt-2">
+            <p className="text-slate-600 dark:text-zinc-400 text-sm sm:text-base mt-2 font-normal">
               Verified feedback from supervisors, project leads, and client partners.
             </p>
           </div>
@@ -145,9 +145,9 @@ export default function Testimonials() {
               setShowForm(!showForm)
               playSound("tick")
             }}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/15 text-white font-mono text-xs border border-white/10 transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/15 text-slate-800 dark:text-white font-mono text-xs border border-black/10 dark:border-white/10 transition-all cursor-pointer"
           >
-            <MessageSquarePlus className="w-4 h-4 text-emerald-400" />
+            <MessageSquarePlus className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>{showForm ? "Close Form" : "Submit Endorsement"}</span>
           </button>
         </div>
@@ -156,9 +156,9 @@ export default function Testimonials() {
         {showForm && (
           <form
             onSubmit={handleSubmit}
-            className="p-5 sm:p-7 rounded-3xl border border-white/15 bg-zinc-950/90 backdrop-blur-2xl mb-6 sm:mb-8 space-y-4 shadow-2xl"
+            className="p-6 sm:p-8 rounded-3xl border border-black/10 dark:border-white/15 bg-white/95 dark:bg-zinc-950/90 backdrop-blur-2xl mb-8 space-y-4 shadow-xl dark:shadow-2xl"
           >
-            <h3 className="text-lg font-medium text-white tracking-tight">
+            <h3 className="text-lg font-medium text-slate-900 dark:text-white tracking-tight">
               Submit an Endorsement
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -168,7 +168,7 @@ export default function Testimonials() {
                 value={formData.author}
                 onChange={(e) => setFormData({ ...formData, author: e.target.value })}
                 required
-                className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 font-mono"
+                className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-black/60 border border-black/10 dark:border-white/10 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-500 focus:outline-none focus:border-emerald-500 font-mono"
               />
               <input
                 type="text"
@@ -176,7 +176,7 @@ export default function Testimonials() {
                 value={formData.role}
                 onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                 required
-                className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 font-mono"
+                className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-black/60 border border-black/10 dark:border-white/10 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-500 focus:outline-none focus:border-emerald-500 font-mono"
               />
             </div>
             <textarea
@@ -185,13 +185,13 @@ export default function Testimonials() {
               onChange={(e) => setFormData({ ...formData, text: e.target.value })}
               required
               rows={3}
-              className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 resize-none font-mono"
+              className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-black/60 border border-black/10 dark:border-white/10 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-500 focus:outline-none focus:border-emerald-500 resize-none font-mono"
             />
             <div className="flex items-center justify-end gap-3 pt-2">
               <button
                 type="button"
                 onClick={() => setShowForm(false)}
-                className="px-4 py-2 text-xs font-mono text-zinc-400 hover:text-white"
+                className="px-4 py-2 text-xs font-mono text-slate-500 dark:text-zinc-400 hover:text-black dark:hover:text-white"
               >
                 Cancel
               </button>
@@ -207,25 +207,25 @@ export default function Testimonials() {
         )}
 
         {/* Endorsements Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="p-5 sm:p-7 rounded-3xl border border-white/10 bg-zinc-950/70 backdrop-blur-2xl shadow-xl flex flex-col justify-between space-y-4 hover:border-emerald-500/30 transition-all duration-300"
+              className="p-6 sm:p-8 rounded-3xl border border-black/10 dark:border-white/10 bg-white/90 dark:bg-zinc-950/70 backdrop-blur-2xl shadow-lg dark:shadow-xl flex flex-col justify-between space-y-4 hover:border-emerald-500/30 transition-all duration-300"
             >
               <div className="space-y-3">
-                <Quote className="w-6 h-6 text-emerald-400/60" />
-                <p className="text-base sm:text-lg text-zinc-200 leading-relaxed font-normal">
+                <Quote className="w-6 h-6 text-emerald-600 dark:text-emerald-400/60" />
+                <p className="text-base sm:text-lg text-slate-800 dark:text-zinc-200 leading-relaxed font-normal">
                   "{item.text}"
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-zinc-400">
+              <div className="pt-4 border-t border-black/10 dark:border-white/10 flex items-center justify-between text-xs font-mono text-slate-500 dark:text-zinc-400">
                 <div>
-                  <div className="text-white font-medium text-sm">{item.author}</div>
-                  <div className="text-zinc-500 text-[11px] mt-0.5">{item.role}</div>
+                  <div className="text-slate-900 dark:text-white font-medium text-sm">{item.author}</div>
+                  <div className="text-slate-500 dark:text-zinc-500 text-[11px] mt-0.5">{item.role}</div>
                 </div>
-                <div className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]" />
+                <div className="h-2 w-2 rounded-full bg-emerald-500 dark:bg-emerald-400 shadow-[0_0_8px_#10b981]" />
               </div>
             </div>
           ))}

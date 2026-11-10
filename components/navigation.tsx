@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
-import { Volume2, VolumeX, Terminal, Sparkles, Compass, ExternalLink } from "lucide-react"
+import { Volume2, VolumeX, Terminal, Sparkles, Compass, ExternalLink, Sun, Moon } from "lucide-react"
+import { useTheme } from "next-themes"
 import { playSound, toggleAudioMute, isAudioMuted } from "@/components/sound/audio-engine"
 
 export default function Navigation() {
@@ -10,6 +11,7 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState<string>("hero")
   const [muted, setMuted] = useState(true)
   const [mounted, setMounted] = useState(false)
+  const { theme, setTheme, resolvedTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
@@ -54,6 +56,12 @@ export default function Navigation() {
     }
   }
 
+  const handleThemeToggle = () => {
+    playSound("snap")
+    const nextTheme = (resolvedTheme || theme) === "dark" ? "light" : "dark"
+    setTheme(nextTheme)
+  }
+
   const openTerminal = () => {
     playSound("snap")
     window.dispatchEvent(new CustomEvent("open-cli-drawer"))
@@ -74,31 +82,31 @@ export default function Navigation() {
         <Link
           href="#hero"
           onClick={() => playSound("tick")}
-          className="group flex items-center gap-3 px-3.5 py-2 rounded-full bg-black/60 backdrop-blur-2xl border border-white/10 shadow-2xl hover:border-emerald-500/40 transition-all duration-300"
+          className="group flex items-center gap-3 px-3.5 py-2 rounded-full bg-white/80 dark:bg-black/60 backdrop-blur-2xl border border-black/10 dark:border-white/10 shadow-lg dark:shadow-2xl hover:border-emerald-500/40 transition-all duration-300"
         >
           {/* Monogram Badge */}
-          <div className="w-7 h-7 rounded-lg bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center font-mono font-bold text-xs text-emerald-400 group-hover:scale-105 transition-transform">
+          <div className="w-7 h-7 rounded-lg bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/30 dark:border-emerald-400/40 flex items-center justify-center font-mono font-bold text-xs text-emerald-600 dark:text-emerald-400 group-hover:scale-105 transition-transform">
             MA
           </div>
 
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
-              <span className="text-xs sm:text-sm font-semibold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+              <span className="text-xs sm:text-sm font-semibold tracking-tight text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                 Mohammed Masood Azhar
               </span>
-              <span className="font-mono text-[9px] px-1 py-0.2 rounded bg-white/10 text-zinc-300 border border-white/10 font-bold">
+              <span className="font-mono text-[9px] px-1 py-0.2 rounded bg-black/5 dark:bg-white/10 text-slate-700 dark:text-zinc-300 border border-black/5 dark:border-white/10 font-bold">
                 V
               </span>
             </div>
-            <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-400">
-              <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-500 dark:text-zinc-400">
+              <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
               <span>Available for Hire</span>
             </div>
           </div>
         </Link>
 
         {/* Center Floating Nav Links */}
-        <nav className="hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-2xl border border-white/10 shadow-2xl">
+        <nav className="hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/80 dark:bg-black/60 backdrop-blur-2xl border border-black/10 dark:border-white/10 shadow-lg dark:shadow-2xl">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id
             return (
@@ -108,8 +116,8 @@ export default function Navigation() {
                 onMouseEnter={() => playSound("tick")}
                 className={`px-3 py-1.5 rounded-full font-mono text-xs transition-all duration-200 ${
                   isActive
-                    ? "bg-white/15 text-white font-semibold shadow-inner"
-                    : "text-zinc-400 hover:text-white hover:bg-white/5"
+                    ? "bg-black/10 dark:bg-white/15 text-slate-900 dark:text-white font-semibold shadow-inner"
+                    : "text-slate-600 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
                 }`}
               >
                 {link.label}
@@ -119,7 +127,7 @@ export default function Navigation() {
         </nav>
 
         {/* Right Controls HUD */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           {/* Direct Fiverr "Hire Me" CTA */}
           <a
             href="https://www.fiverr.com/s/8xyp7XZ"
@@ -137,13 +145,31 @@ export default function Navigation() {
             <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
 
+          {/* Theme Mode Toggle (Light / Dark) */}
+          <button
+            onClick={handleThemeToggle}
+            className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/80 dark:bg-black/60 border border-black/10 dark:border-white/10 hover:border-amber-500/40 dark:hover:border-emerald-500/40 text-slate-800 dark:text-zinc-200 backdrop-blur-2xl transition-all cursor-pointer shadow-lg active:scale-95"
+            title={mounted && (resolvedTheme || theme) === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
+            aria-label="Toggle theme mode"
+          >
+            {mounted ? (
+              (resolvedTheme || theme) === "light" ? (
+                <Moon className="w-4 h-4 text-indigo-600 transition-transform duration-300 hover:rotate-12" />
+              ) : (
+                <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 hover:rotate-45" />
+              )
+            ) : (
+              <span className="w-4 h-4" />
+            )}
+          </button>
+
           {/* Audio Visualizer / Mute Toggle */}
           <button
             onClick={handleMuteToggle}
-            className={`flex items-center gap-2 px-3 py-2 rounded-full border backdrop-blur-2xl font-mono text-xs transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-full border backdrop-blur-2xl font-mono text-xs transition-all cursor-pointer ${
               muted
-                ? "bg-black/60 border-white/10 text-zinc-400 hover:text-white"
-                : "bg-emerald-500/15 border-emerald-500/40 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.2)]"
+                ? "bg-white/80 dark:bg-black/60 border-black/10 dark:border-white/10 text-slate-600 dark:text-zinc-400 hover:text-black dark:hover:text-white"
+                : "bg-emerald-500/15 border-emerald-500/40 text-emerald-600 dark:text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.2)]"
             }`}
             title={muted ? "Enable Audio Micro-Haptics" : "Mute Sound"}
           >
@@ -151,9 +177,9 @@ export default function Navigation() {
               <VolumeX className="w-3.5 h-3.5" />
             ) : (
               <div className="flex items-end gap-[2px] h-3.5">
-                <span className="w-[2px] h-2 bg-emerald-400 animate-pulse" />
-                <span className="w-[2px] h-3.5 bg-emerald-400 animate-pulse delay-75" />
-                <span className="w-[2px] h-2.5 bg-emerald-400 animate-pulse delay-150" />
+                <span className="w-[2px] h-2 bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
+                <span className="w-[2px] h-3.5 bg-emerald-500 dark:bg-emerald-400 animate-pulse delay-75" />
+                <span className="w-[2px] h-2.5 bg-emerald-500 dark:bg-emerald-400 animate-pulse delay-150" />
               </div>
             )}
             <span className="hidden sm:inline text-[11px] font-bold">
@@ -164,10 +190,10 @@ export default function Navigation() {
           {/* Interactive Developer CLI Drawer Trigger */}
           <button
             onClick={openTerminal}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-black/60 border border-white/10 hover:border-emerald-500/40 text-white font-mono text-xs backdrop-blur-2xl transition-all cursor-pointer group shadow-xl active:scale-95"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-full bg-white/80 dark:bg-black/60 border border-black/10 dark:border-white/10 hover:border-emerald-500/40 text-slate-800 dark:text-white font-mono text-xs backdrop-blur-2xl transition-all cursor-pointer group shadow-xl active:scale-95"
             title="Press ~ key to open interactive CLI drawer"
           >
-            <Terminal className="w-3.5 h-3.5 text-emerald-400 group-hover:rotate-12 transition-transform" />
+            <Terminal className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 group-hover:rotate-12 transition-transform" />
             <span className="font-bold hidden sm:inline">[~] CLI</span>
           </button>
         </div>

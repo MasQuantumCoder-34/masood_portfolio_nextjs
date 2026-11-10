@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState, useCallback } from "react"
 import { Sparkles, RefreshCw, Move, Zap } from "lucide-react"
+import { useTheme } from "next-themes"
 import { playSound } from "@/components/sound/audio-engine"
 
 interface TechBadge {
@@ -50,6 +51,13 @@ export default function TechSandbox() {
   const [activeItemCount, setActiveItemCount] = useState(ALL_TECH_ITEMS.length)
   const [lastInteracted, setLastInteracted] = useState<string>("Touch or drag badges")
   const [isMobile, setIsMobile] = useState(false)
+  const { resolvedTheme } = useTheme()
+  const isLight = resolvedTheme === "light"
+  const isLightRef = useRef(isLight)
+
+  useEffect(() => {
+    isLightRef.current = isLight
+  }, [isLight])
 
   // State refs for animation loop
   const badgesRef = useRef<TechBadge[]>([])
@@ -304,27 +312,46 @@ export default function TechSandbox() {
         }
 
         // Pill Background
+        const isCurrentLight = isLightRef.current
+        let badgeColor = b.color
+        let badgeBorder = b.borderColor
+        let badgeText = b.textColor
+
+        if (isCurrentLight && b.label === "Next.js 16") {
+          badgeBorder = "#0f172a"
+          badgeText = "#0f172a"
+          badgeColor = "rgba(15, 23, 42, 0.08)"
+        }
+
         ctx.beginPath()
         ctx.roundRect(-pillWidth / 2, -pillHeight / 2, pillWidth, pillHeight, cornerRadius)
-        ctx.fillStyle = isDragged ? "rgba(255, 255, 255, 0.22)" : b.color
+        ctx.fillStyle = isDragged
+          ? isCurrentLight
+            ? "rgba(15, 23, 42, 0.15)"
+            : "rgba(255, 255, 255, 0.22)"
+          : badgeColor
         ctx.fill()
 
         // Border
         ctx.lineWidth = isDragged ? 2 : 1.2
-        ctx.strokeStyle = isDragged ? "#ffffff" : b.borderColor
+        ctx.strokeStyle = isDragged
+          ? isCurrentLight
+            ? "#0f172a"
+            : "#ffffff"
+          : badgeBorder
         ctx.stroke()
 
         // Tiny LED indicator dot
         ctx.beginPath()
         ctx.arc(-pillWidth / 2 + (b.pillHeight > 30 ? 14 : 10), 0, b.pillHeight > 30 ? 3 : 2.5, 0, Math.PI * 2)
-        ctx.fillStyle = b.borderColor
-        ctx.shadowColor = b.borderColor
+        ctx.fillStyle = badgeBorder
+        ctx.shadowColor = badgeBorder
         ctx.shadowBlur = 6
         ctx.fill()
 
         // Badge Text
         ctx.shadowBlur = 0
-        ctx.fillStyle = b.textColor
+        ctx.fillStyle = badgeText
         ctx.font = b.pillHeight > 30
           ? "600 12px var(--font-mono, monospace)"
           : "600 10.5px var(--font-mono, monospace)"
@@ -407,28 +434,28 @@ export default function TechSandbox() {
   }
 
   return (
-    <section id="sandbox" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/10 overflow-hidden bg-black/40">
+    <section id="sandbox" className="relative py-16 sm:py-20 lg:py-24 px-5 sm:px-6 border-b border-black/5 dark:border-white/10 overflow-hidden bg-slate-50 dark:bg-black/40 transition-colors duration-300">
       {/* Ambient background volumetric glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-emerald-500/10 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 sm:mb-10">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Section 03 // Physics Engine</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-foreground">
+            <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-slate-900 dark:text-foreground">
               Zero-Gravity Tech Sandbox
             </h2>
-            <p className="text-muted-foreground text-sm sm:text-base mt-2 max-w-xl">
+            <p className="text-slate-600 dark:text-muted-foreground text-sm sm:text-base mt-2 max-w-xl">
               Skill badges behave as interactive physical rigid bodies with elastic collisions. Touch, drag, fling, or switch gravitational fields.
             </p>
           </div>
 
           {/* Interactive Physics Control Bar */}
-          <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-zinc-900/80 border border-white/10 backdrop-blur-xl">
+          <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-white/90 dark:bg-zinc-900/80 border border-black/10 dark:border-white/10 backdrop-blur-xl shadow-md dark:shadow-none">
             <button
               onClick={() => {
                 setGravityMode("zero")
@@ -437,7 +464,7 @@ export default function TechSandbox() {
               className={`px-3 py-1.5 rounded-xl font-mono text-xs transition-all cursor-pointer ${
                 gravityMode === "zero"
                   ? "bg-emerald-500 text-black font-semibold shadow-lg shadow-emerald-500/20"
-                  : "text-zinc-400 hover:text-white"
+                  : "text-slate-600 dark:text-zinc-400 hover:text-black dark:hover:text-white"
               }`}
             >
               Zero-G
@@ -450,7 +477,7 @@ export default function TechSandbox() {
               className={`px-3 py-1.5 rounded-xl font-mono text-xs transition-all cursor-pointer ${
                 gravityMode === "orbit"
                   ? "bg-cyan-500 text-black font-semibold shadow-lg shadow-cyan-500/20"
-                  : "text-zinc-400 hover:text-white"
+                  : "text-slate-600 dark:text-zinc-400 hover:text-black dark:hover:text-white"
               }`}
             >
               Lunar
@@ -463,18 +490,18 @@ export default function TechSandbox() {
               className={`px-3 py-1.5 rounded-xl font-mono text-xs transition-all cursor-pointer ${
                 gravityMode === "earth"
                   ? "bg-amber-500 text-black font-semibold shadow-lg shadow-amber-500/20"
-                  : "text-zinc-400 hover:text-white"
+                  : "text-slate-600 dark:text-zinc-400 hover:text-black dark:hover:text-white"
               }`}
             >
               Earth (9.8)
             </button>
-            <div className="w-[1px] h-5 bg-white/10 mx-0.5" />
+            <div className="w-[1px] h-5 bg-black/10 dark:bg-white/10 mx-0.5" />
             <button
               onClick={handleAgitate}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 text-white font-mono text-xs border border-white/10 transition-colors cursor-pointer active:scale-95"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/15 text-slate-800 dark:text-white font-mono text-xs border border-black/10 dark:border-white/10 transition-colors cursor-pointer active:scale-95"
               title="Apply impulse blast"
             >
-              <RefreshCw className="w-3.5 h-3.5 text-emerald-400 animate-spin-reverse" />
+              <RefreshCw className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 animate-spin-reverse" />
               <span>Agitate ⚡</span>
             </button>
           </div>
@@ -483,7 +510,7 @@ export default function TechSandbox() {
         {/* Sandbox Canvas Container */}
         <div
           ref={containerRef}
-          className="relative w-full h-[380px] sm:h-[460px] lg:h-[520px] rounded-3xl border border-white/10 bg-zinc-950/70 backdrop-blur-2xl shadow-2xl overflow-hidden group touch-pan-y"
+          className="relative w-full h-[440px] sm:h-[480px] lg:h-[520px] rounded-3xl border border-black/10 dark:border-white/10 bg-slate-100/90 dark:bg-zinc-950/70 backdrop-blur-2xl shadow-xl dark:shadow-2xl overflow-hidden group touch-pan-y"
         >
           {/* Canvas with Universal Pointer Events */}
           <canvas
@@ -497,20 +524,20 @@ export default function TechSandbox() {
 
           {/* Interactive overlay telemetry indicators */}
           <div className="absolute top-4 left-5 pointer-events-none flex items-center gap-3">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-            <span className="font-mono text-[11px] text-zinc-400 tracking-wider uppercase">
+            <span className="flex h-2 w-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping" />
+            <span className="font-mono text-[11px] text-slate-600 dark:text-zinc-400 tracking-wider uppercase font-medium">
               Rigid-Bodies: {activeItemCount} Active // 60 FPS
             </span>
           </div>
 
           <div className="absolute bottom-4 left-5 pointer-events-none">
-            <span className="font-mono text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
+            <span className="font-mono text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full font-medium">
               {lastInteracted}
             </span>
           </div>
 
-          <div className="absolute bottom-4 right-5 pointer-events-none flex items-center gap-2 text-zinc-400 font-mono text-xs">
-            <Move className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+          <div className="absolute bottom-4 right-5 pointer-events-none flex items-center gap-2 text-slate-600 dark:text-zinc-400 font-mono text-xs font-medium">
+            <Move className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 animate-pulse" />
             <span>{isMobile ? "Touch & toss badges" : "Click & Drag to impart velocity"}</span>
           </div>
         </div>

@@ -246,7 +246,7 @@ export default function HeroCanvas() {
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
-      className="relative w-full h-[260px] sm:h-[360px] lg:h-[480px] rounded-3xl border border-white/10 bg-zinc-950/60 backdrop-blur-2xl shadow-2xl overflow-hidden group cursor-grab active:cursor-grabbing select-none touch-none"
+      className="relative w-full h-[300px] sm:h-[380px] lg:h-[480px] rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-zinc-950/60 backdrop-blur-2xl shadow-xl dark:shadow-2xl overflow-hidden group cursor-grab active:cursor-grabbing select-none touch-none"
     >
       {/* 3D WebGL Canvas */}
       <Canvas
@@ -271,8 +271,8 @@ export default function HeroCanvas() {
 
       {/* Floating HUD Micro-Controls */}
       <div className="absolute top-4 left-5 pointer-events-none flex items-center gap-2">
-        <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-        <span className="font-mono text-[11px] text-zinc-400 tracking-wider uppercase">
+        <span className="flex h-2 w-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping" />
+        <span className="font-mono text-[11px] text-slate-600 dark:text-zinc-400 tracking-wider uppercase font-medium">
           Three.js // Quantum Core
         </span>
       </div>
@@ -284,15 +284,15 @@ export default function HeroCanvas() {
             setWireframe(!wireframe)
             playSound("snap")
           }}
-          className="px-2.5 py-1 rounded-full bg-black/70 hover:bg-black/90 border border-white/15 text-white font-mono text-[10px] uppercase transition-all backdrop-blur-md cursor-pointer active:scale-95"
+          className="px-2.5 py-1 rounded-full bg-slate-900/80 hover:bg-slate-900 text-white dark:bg-black/70 dark:hover:bg-black/90 border border-black/10 dark:border-white/15 font-mono text-[10px] uppercase transition-all backdrop-blur-md cursor-pointer active:scale-95"
         >
           {wireframe ? "Solid Core" : "Wireframe"}
         </button>
       </div>
 
       <div className="absolute bottom-4 left-5 pointer-events-none flex items-center gap-2">
-        <span className="font-mono text-[11px] text-zinc-400 flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+        <span className="font-mono text-[11px] text-slate-600 dark:text-zinc-400 flex items-center gap-1.5 font-medium">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
           {isMobile ? "TOUCH & DRAG TO SPIN 360°" : "DRAG TO SPIN 360° // AUTO-ORBITING"}
         </span>
       </div>

@@ -15,7 +15,7 @@ import BackToTop from "@/components/back-to-top"
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-[#050608] selection:bg-emerald-500/30 selection:text-white">
+    <main className="relative min-h-screen bg-slate-50 dark:bg-[#050608] text-slate-900 dark:text-foreground selection:bg-emerald-500/30 selection:text-emerald-950 dark:selection:text-white transition-colors duration-300">
       <Navigation />
       <Hero />
       <PhilosophySection />

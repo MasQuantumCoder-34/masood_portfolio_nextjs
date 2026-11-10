@@ -104,28 +104,28 @@ export default function Projects() {
     filter === "all" ? projects : projects.filter((p) => p.filterType === filter)
 
   return (
-    <section id="projects" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/10 bg-black/70 overflow-hidden">
+    <section id="projects" className="relative py-16 sm:py-20 lg:py-24 px-5 sm:px-6 border-b border-black/5 dark:border-white/10 bg-slate-100/50 dark:bg-black/70 overflow-hidden transition-colors duration-300">
       {/* Ambient background volumetric glow */}
       <div className="absolute top-1/2 left-1/3 w-[550px] h-[350px] bg-emerald-500/10 blur-[150px] rounded-full pointer-events-none" />
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 sm:mb-10">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Section 04 // 3D Parallax Deck</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-foreground">
+            <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-slate-900 dark:text-foreground">
               Signature Production Works
             </h2>
-            <p className="text-muted-foreground text-sm sm:text-base mt-2 max-w-xl">
+            <p className="text-slate-600 dark:text-muted-foreground text-sm sm:text-base mt-2 max-w-xl font-normal">
               Production web applications, parent agency showcases, and commercial platforms engineered with React, Next.js, Flutter, and TypeScript. Hover to engage 3D perspective tilt.
             </p>
           </div>
 
           {/* Filter Pills */}
-          <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-zinc-900/80 border border-white/10 backdrop-blur-xl">
+          <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-white/90 dark:bg-zinc-900/80 border border-black/10 dark:border-white/10 backdrop-blur-xl shadow-md dark:shadow-none">
             <button
               onClick={() => {
                 setFilter("all")
@@ -133,8 +133,8 @@ export default function Projects() {
               }}
               className={`px-3.5 py-1.5 rounded-xl font-mono text-xs transition-all cursor-pointer ${
                 filter === "all"
-                  ? "bg-white text-black font-semibold shadow-lg shadow-white/10"
-                  : "text-zinc-400 hover:text-white"
+                  ? "bg-slate-900 text-white dark:bg-white dark:text-black font-semibold shadow-md"
+                  : "text-slate-600 dark:text-zinc-400 hover:text-black dark:hover:text-white"
               }`}
             >
               All Works
@@ -147,7 +147,7 @@ export default function Projects() {
               className={`px-3.5 py-1.5 rounded-xl font-mono text-xs transition-all cursor-pointer ${
                 filter === "storefront"
                   ? "bg-cyan-500 text-black font-semibold shadow-lg shadow-cyan-500/20"
-                  : "text-zinc-400 hover:text-white"
+                  : "text-slate-600 dark:text-zinc-400 hover:text-black dark:hover:text-white"
               }`}
             >
               Storefronts & Apps
@@ -160,7 +160,7 @@ export default function Projects() {
               className={`px-3.5 py-1.5 rounded-xl font-mono text-xs transition-all cursor-pointer ${
                 filter === "enterprise"
                   ? "bg-emerald-500 text-black font-semibold shadow-lg shadow-emerald-500/20"
-                  : "text-zinc-400 hover:text-white"
+                  : "text-slate-600 dark:text-zinc-400 hover:text-black dark:hover:text-white"
               }`}
             >
               Enterprise Systems
@@ -169,30 +169,30 @@ export default function Projects() {
         </div>
 
         {/* High-Impact Fiverr Bug-Fixing & API Integration Callout Banner */}
-        <div className="mb-6 sm:mb-8 p-5 sm:p-7 rounded-3xl border border-emerald-500/30 bg-gradient-to-r from-emerald-950/40 via-zinc-950/80 to-cyan-950/40 backdrop-blur-2xl shadow-2xl relative overflow-hidden group">
+        <div className="mb-8 sm:mb-10 p-6 sm:p-8 rounded-3xl border border-emerald-500/30 bg-gradient-to-r from-emerald-50/90 via-white/90 to-cyan-50/90 dark:from-emerald-950/40 dark:via-zinc-950/80 dark:to-cyan-950/40 backdrop-blur-2xl shadow-xl dark:shadow-2xl relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 blur-3xl rounded-full pointer-events-none" />
           
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
             <div className="space-y-2 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-semibold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 font-mono text-xs font-semibold">
                 <Wrench className="w-3.5 h-3.5" />
                 <span>Freelance Service Available</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
                 Need a bug fixed in a similar app? Order my bug-fixing service here.
               </h3>
-              <p className="text-sm text-zinc-300 leading-relaxed">
-                Specialized in <strong className="text-white">Flutter & Dart</strong> mobile UI fixes, <strong className="text-white">React & Next.js</strong> state debugging, <strong className="text-white">REST API integration</strong>, cache invalidation, and production frontend patching. Fast turnaround guaranteed.
+              <p className="text-sm text-slate-700 dark:text-zinc-300 leading-relaxed font-normal">
+                Specialized in <strong className="text-slate-900 dark:text-white">Flutter & Dart</strong> mobile UI fixes, <strong className="text-slate-900 dark:text-white">React & Next.js</strong> state debugging, <strong className="text-slate-900 dark:text-white">REST API integration</strong>, cache invalidation, and production frontend patching. Fast turnaround guaranteed.
               </p>
-              <div className="flex flex-wrap gap-2 pt-1 font-mono text-[11px] text-zinc-400">
-                <span className="flex items-center gap-1 bg-black/50 px-2.5 py-1 rounded-lg border border-white/5">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-400" /> Flutter & Dart Fixes
+              <div className="flex flex-wrap gap-2 pt-1 font-mono text-[11px] text-slate-600 dark:text-zinc-400">
+                <span className="flex items-center gap-1 bg-white/80 dark:bg-black/50 px-2.5 py-1 rounded-lg border border-black/5 dark:border-white/5">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> Flutter & Dart Fixes
                 </span>
-                <span className="flex items-center gap-1 bg-black/50 px-2.5 py-1 rounded-lg border border-white/5">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-400" /> API Integration
+                <span className="flex items-center gap-1 bg-white/80 dark:bg-black/50 px-2.5 py-1 rounded-lg border border-black/5 dark:border-white/5">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> API Integration
                 </span>
-                <span className="flex items-center gap-1 bg-black/50 px-2.5 py-1 rounded-lg border border-white/5">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-400" /> React State & UI Bugs
+                <span className="flex items-center gap-1 bg-white/80 dark:bg-black/50 px-2.5 py-1 rounded-lg border border-black/5 dark:border-white/5">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> React State & UI Bugs
                 </span>
               </div>
             </div>
@@ -211,7 +211,7 @@ export default function Projects() {
         </div>
 
         {/* 3D Perspective Tilt Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {filteredProjects.map((project) => (
             <TiltCard key={project.id} {...project} />
           ))}
